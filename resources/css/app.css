@@ -1,0 +1,77 @@
+h1,h2,h3,h4,h5,h6,p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar a h1 {
+    color: #313DAA;
+    font-family: Poppins;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* sidebr */
+
+.sidebar {
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+.sidebar ul li {
+    margin: 20px 0 20px 0;
+}
+
+/* product dropdown items display none */
+.sidebar .product-dropdown-items,
+.sidebar .customers-dropdown-items,
+.sidebar .staffs-dropdown-items {
+    display: none;
+}
+
+/* main */
+
+.main {
+    background-color: #EFEFEF;
+}
+
+.main-box {
+    border-radius: 10px;
+    background: #FFF;
+    padding: 30px;
+}
+
+.main .page-title-h1 {
+    padding: 20px 0 20px 0;
+}
+
+.main .main-box .table-heading{
+    margin-bottom: 30px;
+}
+
+.main .main-box .buttons {
+    text-align: right;
+}
+
+.main .main-box .new-btn {
+    background-color: #313DAA;
+    color: #ffffff;
+}
+
+.main table img {
+    width: 50px;
+    height: 50px;
+}
+
+/* modals */
+
+.modal-body .form-group {
+    text-align: left;
+}
+
+.modal-body .form-group {
+    margin-bottom: 20px;
+}
+
+/* endmodals */

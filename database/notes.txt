@@ -1,0 +1,7 @@
+default
+- role - admin
+- user - admin
+- customer type  - customertype1
+- customer - customer1
+- product category - category1
+- supplier - supplier1

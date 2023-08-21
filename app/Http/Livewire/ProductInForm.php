@@ -31,11 +31,20 @@ class ProductInForm extends Component
             'quantity' => $this->quantity
         ])) {
 
+            
+
             // update the current quantity
             $currentQuantity = Products::where(['id' => $this->productId])->value('productQuantity');
+            $newQuantity = $currentQuantity + $this->quantity;
+
+            if ($newQuantity >= 1) {
+                Products::where(['id' => $this->productId])->update([
+                    'productStatus' => 'available'
+                ]);
+            }
 
             if (Products::where(['id' => $this->productId])->update([
-                'productQuantity' => $currentQuantity + $this->quantity
+                'productQuantity' => $newQuantity
             ])) {
                 $this->notify = $this->quantity.' quantity has been added. Current quantity is '.$currentQuantity + $this->quantity;
             }

@@ -53,8 +53,8 @@
                         <a href="{{ url('/productcategories') }}" class="nav-link">
                             <li class="nav-link"><h4>Product Categories</h4></li>
                         </a>
-                        <a href="{{ url('/productmisfortunes') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Misfortunes</h4></li>
+                        <a href="{{ url('/productfailures') }}" class="nav-link">
+                            <li class="nav-link"><h4>Product Failures</h4></li>
                         </a>
                     </ul>
                 </li>

@@ -24,6 +24,20 @@
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/v4-font-face.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/v5-font-face.min.css') }}"/>
 
+    {{-- mdb --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/mdb.min.css') }}"> --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/datatables-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/datatables-select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/datatables2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/directives.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/flag.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/jquery.zmd.hierarchical-display.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/rating.min.css') }}">
+
+
+
     {{-- theme styles --}}
     
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
@@ -155,6 +169,22 @@
     <script src="{{ asset('assets/fontawesome/js/regular.min.js') }}"></script>
     <script src="{{ asset('assets/fontawesome/js/solid.min.js') }}"></script>
     <script src="{{ asset('assets/fontawesome/js/v4-shims.min.js') }}"></script>
+
+    {{-- mdb script --}}
+
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/mdb.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables-select.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables-select2.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables2.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/directives.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/flag.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/jquery.zmd.hierarchical-display.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/rating.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/mdb.js') }}"></script>
 
     {{-- prod --}}
 

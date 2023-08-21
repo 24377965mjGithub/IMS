@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AddSupplierController;
 use App\Http\Controllers\Api\GetSuppliersController;
 use App\Http\Controllers\Api\EditSuppliersController;
+use App\Http\Controllers\Api\GetSalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // get
 
 Route::middleware('auth:sanctum')->get('/getsuppliers',[GetSuppliersController::class, 'getSuppliers']);
+Route::middleware('auth:sanctum')->get('/getsales',[GetSalesController::class, 'getSales']);
 
 // put
 

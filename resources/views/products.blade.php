@@ -53,8 +53,8 @@
                         <a href="{{ url('/productcategories') }}" class="nav-link">
                             <li class="nav-link"><h4>Product Categories</h4></li>
                         </a>
-                        <a href="{{ url('/productmisfortunes') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Misfortunes</h4></li>
+                        <a href="{{ url('/productfailures') }}" class="nav-link">
+                            <li class="nav-link"><h4>Product Failures</h4></li>
                         </a>
                     </ul>
                 </li>
@@ -144,6 +144,22 @@
                         @if (session('productDeleted'))
                             <p class="alert alert-success">{{ session('productDeleted') }}</p>
                         @endif
+
+                        {{-- product out save --}}
+
+                        @if (session('productOutSave'))
+                            <p class="alert alert-success">{{ session('productOutSave') }}</p>
+                        @endif
+
+                        {{-- end product out save --}}
+
+                        {{-- product failure save --}}
+
+                        @if (session('productFailureSave'))
+                            <p class="alert alert-success">{{ session('productFailureSave') }}</p>
+                        @endif
+                        
+                        {{-- end product failure save --}}
                         
                         {{-- end messages --}}
 
@@ -273,7 +289,7 @@
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>
                                   <th scope="col">Name</th>
-                                  <th scope="col">Description</th>
+                                  {{-- <th scope="col">Description</th> --}}
                                   <th scope="col">Category</th>
                                   <th scope="col">Supplier</th>
                                   <th scope="col">Selling Price</th>
@@ -293,7 +309,7 @@
                                         </td>
                                         <td>{{ $product->productBarCode }}</td>
                                         <td><b class="font-weight-bold">{{ $product->productName }}</b></td>
-                                        <td>{{ $product->productDescription }}</td>
+                                        {{-- <td>{{ $product->productDescription }}</td> --}}
                                         <td>
                                             @foreach ($productCategories as $productCategory)
                                                 @if ($productCategory->id == $product->productCategoryId)
@@ -309,9 +325,21 @@
                                             @endforeach
                                         </td>
                                         <td><b class="font-weight-bold text-success">₱ {{ $product->productPrice }}</b></td>
-                                        <td><b class="font-weight-bold text-danger">₱ {{ $product->productCost }}</b></td>
-                                        <td>{{ $product->productQuantity }}</td>
-                                        <td>{{ $product->productStatus }}</td>
+                                        <td><b class="font-weight-bold text-danger">₱ {{ $product->productCost }} </b></td>
+                                        <td>
+                                            @if ($product->productQuantity <= 0)
+                                                <span class="badge rounded-pill text-bg-danger">{{ $product->productQuantity }}</span>
+                                            @elseif ($product->productQuantity <= 10)
+                                                <span class="badge rounded-pill text-bg-warning">{{ $product->productQuantity }}</span>
+                                            @elseif ($product->productQuantity <= 20)
+                                                <span class="badge rounded-pill text-bg-info">{{ $product->productQuantity }}</span>
+                                            @elseif ($product->productQuantity <= 30)
+                                                <span class="badge rounded-pill text-bg-primary">{{ $product->productQuantity }}</span>
+                                            @else
+                                                <span class="badge rounded-pill text-bg-success">{{ $product->productQuantity }}</span>
+                                            @endif
+                                        </td>
+                                        <td><b class="font-weight-bold">{{ $product->productStatus }}</b></td>
                                         <td>
                                             <!-- Example single danger button -->
                                             <div class="btn-group">
@@ -321,7 +349,7 @@
                                                 <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#in{{ $product->id }}">In</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#out{{ $product->id }}">Out</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logs{{ $product->id }}">View Logs</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#failure{{ $product->id }}">Failure</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editproduct{{ $product->id }}">Edit info</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeProductImage{{ $product->id }}">Change Image</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteProduct{{ $product->id }}">Remove</a>
@@ -518,6 +546,126 @@
                                             </div>
 
                                             {{-- end product in modal --}}
+
+                                            {{-- product out modal --}}
+
+                                            <div class="modal fade" id="out{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add out for <b>{{ $product->productName }}</b></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card border-success mb-3" style="max-width: 100%;">
+                                                            <div class="card-body text-success">
+                                                              <p class="card-text">
+                                                                <b>Product Name: </b>{{ $product->productName }}<br>
+                                                                @foreach ($productCategories as $productCategory)
+                                                                    @if ($product->productCategoryId === $productCategory->id)
+                                                                        <b>Product Category: </b>{{ $productCategory->categoryName }}<br>
+                                                                    @endif
+                                                                @endforeach
+                                                                
+                                                                @foreach ($suppliers as $supplier)
+                                                                    @if ($product->suppliersId == $supplier->id)
+                                                                        <b>Supplier: </b>{{ $supplier->suppliersName }}<br>
+                                                                    @endif
+                                                                @endforeach
+                                                                <b>Current Quantity: </b>{{ $product->productQuantity }}<br>
+                                                              </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <form action="{{ url('/saveproductout', [
+                                                            'productCategoryId' => $product->productCategoryId,
+                                                            'suppliersId' => $product->suppliersId,
+                                                            'productId' => $product->id,
+                                                        ]) }}" method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="">Customer</label>
+                                                                <select name="customer" id="" class="form-control">
+                                                                    @foreach ($customers as $customer)
+                                                                        <option value="{{ $customer->id }}">{{ $customer->customersName }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">Quantity</label>
+                                                                <input type="number" name="quantity" id="" class="form-control" placeholder="quantity">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button class="btn btn-success form-control"><i class="fa fa-check"></i> Save</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- end product out modal --}}
+
+                                            {{-- product failure modal --}}
+
+                                            <div class="modal fade" id="failure{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add failure for <b>{{ $product->productName }}</b></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card border-success mb-3" style="max-width: 100%;">
+                                                            <div class="card-body text-success">
+                                                              <p class="card-text">
+                                                                <b>Product Name: </b>{{ $product->productName }}<br>
+                                                                @foreach ($productCategories as $productCategory)
+                                                                    @if ($product->productCategoryId === $productCategory->id)
+                                                                        <b>Product Category: </b>{{ $productCategory->categoryName }}<br>
+                                                                    @endif
+                                                                @endforeach
+                                                                
+                                                                @foreach ($suppliers as $supplier)
+                                                                    @if ($product->suppliersId == $supplier->id)
+                                                                        <b>Supplier: </b>{{ $supplier->suppliersName }}<br>
+                                                                    @endif
+                                                                @endforeach
+                                                                <b>Current Quantity: </b>{{ $product->productQuantity }}<br>
+                                                              </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <form action="{{ url('/saveproductfailure', [
+                                                            'productCategoryId' => $product->productCategoryId,
+                                                            'suppliersId' => $product->suppliersId,
+                                                            'productId' => $product->id,
+                                                        ]) }}" method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="">Reason</label>
+                                                                <textarea name="reason" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">Quantity</label>
+                                                                <input type="number" name="quantity" id="" class="form-control" placeholder="quantity">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button class="btn btn-success form-control"><i class="fa fa-check"></i> Save</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- end product failure modal --}}
 
                                         </td>
                                     </tr>

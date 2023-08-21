@@ -50,8 +50,8 @@
                         <a href="{{ url('/productcategories') }}" class="nav-link">
                             <li class="nav-link"><h4>Product Categories</h4></li>
                         </a>
-                        <a href="{{ url('/productmisfortunes') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Misfortunes</h4></li>
+                        <a href="{{ url('/productfailures') }}" class="nav-link">
+                            <li class="nav-link"><h4>Product Failures</h4></li>
                         </a>
                     </ul>
                 </li>
@@ -123,7 +123,7 @@
 
                         {{-- messages --}}
 
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             @foreach ($errors->all() as $error)
                                 <p class="alert alert-danger">{{ $error }}</p>
                             @endforeach
@@ -140,7 +140,7 @@
                         @endif
                         @if (session('productDeleted'))
                             <p class="alert alert-success">{{ session('productDeleted') }}</p>
-                        @endif
+                        @endif --}}
                         
                         {{-- end messages --}}
 
@@ -172,7 +172,7 @@
 
                                 {{-- product modal --}}
 
-                                <div class="modal fade" id="product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div wire:ignore.self style="text-align: left" class="modal fade" id="product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -182,9 +182,32 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+
+                                            {{-- msgs --}}
+
+                                            @if ($errors->any())
+                                                @foreach ($errors->all() as $error)
+                                                    <p class="alert alert-danger alert-dismissable">
+                                                        {{ $error }}
+                                                        <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
+                                                    </p>
+                                                @endforeach
+                                            @endif
+                                            @if (session()->has('message'))
+                                                <p class="alert alert-success alert-dismissable">
+                                                    {{ session('message') }}
+                                                    <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
+                                                </p>
+                                            @endif
+
+                                            {{-- end msgs --}}
+
                                             <div class="form-group">
                                                 <label for="">Customer Type</label>
-                                                <input type="text" class="form-control" placeholder="Reseller... etc">
+                                                <input type="text" class="form-control" placeholder="Reseller... etc" wire:model="customerType">
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-success" wire:click="saveCustomerType"><i class="fa fa-check"></i> Save</button>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -209,27 +232,103 @@
                                 <th scope="col">Customer Type</th>
                                 <th scope="col">Date Added</th>
                             <tbody>
-                                {{-- loop all the product ins --}}
-                                <tr>
-                                    <th scope="row">
-                                        <input type="checkbox" name="" id="">
-                                    </th>
-                                    <td>Normal Customer</td>
-                                    <td>asdas</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Action
-                                            </button>
-                                            <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {{-- end loop of all product ins --}}
+                                {{-- loop all the customer types --}}
+                                @foreach ($customerTypes as $customerType)
+                                    <tr wire:key="{{ $customerType->id }}">
+                                        <th scope="row">
+                                            <input type="checkbox" name="" id="">
+                                        </th>
+                                        <td>{{ $customerType->customersType }}</td>
+                                        <td>{{ $customerType->created_at->format(' d M Y H:i:s') }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Action
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit{{ $customerType->id }}" wire:click="editData('{{ $customerType->customersType }}')">Edit</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete{{ $customerType->id }}">Delete</a>
+                                            </div>
+
+                                            {{-- change image modal --}}
+
+                                            <div wire:ignore.self class="modal fade" id="edit{{ $customerType->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Edit {{ $customerType->customersType }}</b></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        {{-- msgs --}}
+
+                                                        @if ($errors->any())
+                                                            @foreach ($errors->all() as $error)
+                                                                <p class="alert alert-danger alert-dismissable">
+                                                                    {{ $error }}
+                                                                    <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
+                                                                </p>
+                                                            @endforeach
+                                                        @endif
+                                                        @if (session()->has('message'))
+                                                            <p class="alert alert-success alert-dismissable">
+                                                                {{ session('message') }}
+                                                                <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
+                                                            </p>
+                                                        @endif
+
+                                                    {{-- end msgs --}}
+                                                        <div class="form-group">
+                                                            <label for="">Customer Type</label>
+                                                            <input type="text" class="form-control" wire:model="editCustomerType" placeholder="Retailer ...">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-info" wire:click="saveEdit({{$customerType->id}})"><i class="fa fa-check"></i> Save</button>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- end change delete modal --}}
+
+                                            <div wire:ignore.self class="modal fade" id="delete{{ $customerType->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Delete {{ $customerType->customersType }}</b></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @if (session()->has('message'))
+                                                            <p class="alert alert-success alert-dismissable">
+                                                                {{ session('message2') }}
+                                                                <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
+                                                            </p>
+                                                        @endif
+                                                        <p>
+                                                            Do you want to delete {{ $customerType->customersType }}? All data associated with this record will be lost. This action cannot be undone.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success" wire:click="delete({{ $customerType->id }})" data-dismiss="modal"><i class="fa fa-check"></i> Yes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- end delete modal --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                {{-- end loop of all customer types --}}
                             </tbody>
                         </table>
+                    {{ $customerTypes->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

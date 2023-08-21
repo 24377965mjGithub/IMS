@@ -15,7 +15,7 @@ class ProductInsController extends Controller
 {
     public function productIns() {
 
-        $productIns = ProductIns::orderBy('id', 'desc')->paginate(5);
+        $productIns = ProductIns::orderBy('id', 'desc')->paginate(10);
         $productCategories = ProductCategory::all();
         $suppliers = Suppliers::all();
         $products = Products::all();

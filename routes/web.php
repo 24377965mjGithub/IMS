@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddCustomerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -19,6 +20,18 @@ use App\Http\Controllers\SaveProductImageController;
 use App\Http\Controllers\DeleteProductController;
 use App\Http\Controllers\ProductInsController;
 use App\Http\Controllers\CustomerTypesController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\DeleteCustomerController;
+use App\Http\Controllers\ProductFailureController;
+use App\Http\Controllers\ProductOutController;
+use App\Http\Controllers\SaveEditCustomer;
+use App\Http\Controllers\SaveProductFailureController;
+use App\Http\Controllers\SaveProductOutController;
+use App\Http\Controllers\StaffRoleController;
+use App\Http\Controllers\SaveRoleController;
+use App\Http\Controllers\SaveEditRoleController;
+use App\Http\Controllers\DeleteRoleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,10 +77,16 @@ Route::get('/productcategories', [ProductCategoryController::class, 'productCate
 Route::get('/suppliers', [SuppliersController::class, 'suppliers'])->middleware(['auth', 'verified']);
 Route::get('/productins', [ProductInsController::class, 'productIns'])->middleware(['auth', 'verified']);
 Route::get('/customertypes', [CustomerTypesController::class, 'customerTypes'])->middleware(['auth', 'verified']);
+Route::get('/customers', [CustomersController::class, 'customers'])->middleware(['auth', 'verified']);
+Route::get('/productouts', [ProductOutController::class, 'productOuts'])->middleware(['auth', 'verified']);
+Route::get('/productfailures', [ProductFailureController::class, 'productFailure'])->middleware(['auth', 'verified']);
+Route::get('/staffroles', [StaffRoleController::class, 'staffRole'])->middleware(['auth', 'verified']);
 
 Route::get('/deletesupplier/{id}', [DeleteSupplier::class, 'deleteSupplier'])->middleware(['auth', 'verified']);
 Route::get('/deleteproductcategory/{id}', [DeleteProductCategory::class, 'deleteProductCategory'])->middleware(['auth', 'verified']);
 Route::get('/deleteproduct/{id}', [DeleteProductController::class, 'deleteProduct'])->middleware(['auth', 'verified']);
+Route::get('/deletecustomer/{id}', [DeleteCustomerController::class, 'deleteCustomer'])->middleware(['auth', 'verified']);
+Route::get('/deleterole/{id}', [DeleteRoleController::class, 'deleteRole'])->middleware(['auth', 'verified']);
 
 // posts requests
 Route::post('/addsupplier', [AddSupplierController::class, 'addSupplier'])->middleware(['auth', 'verified']);
@@ -77,5 +96,11 @@ Route::post('/saveproductcategory/{id}', [SaveProductCategory::class, 'saveProdu
 Route::post('/saveproduct', [ProductUploadController::class, 'productUpload'])->middleware(['auth', 'verified']);
 Route::post('/saveeditproduct/{id}', [SaveEditProductController::class, 'saveEditProduct'])->middleware(['auth', 'verified']);
 Route::post('/saveeditproductimg/{id}', [SaveProductImageController::class, 'saveProductImage'])->middleware(['auth', 'verified']);
+Route::post('/addcustomer', [AddCustomerController::class, 'addCustomer'])->middleware(['auth', 'verified']);
+Route::post('/saveeditcustomer/{id}', [SaveEditCustomer::class, 'saveEditCustomer'])->middleware(['auth', 'verified']);
+Route::post('/saveproductout/{productCategoryId}/{suppliersId}/{productId}', [SaveProductOutController::class, 'saveProductOut'])->middleware(['auth', 'verified']);
+Route::post('/saveproductfailure/{productCategoryId}/{suppliersId}/{productId}', [SaveProductFailureController::class, 'saveProductFailure'])->middleware(['auth', 'verified']);
+Route::post('/saverole', [SaveRoleController::class, 'saveRole'])->middleware(['auth', 'verified']);
+Route::post('/saveeditrole/{id}', [SaveEditRoleController::class, 'saveEditRole'])->middleware(['auth', 'verified']);
 
 // tests

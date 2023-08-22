@@ -12,7 +12,9 @@ class SaveEditRoleController extends Controller
             'roleName' => "required"
         ]);
 
-        if (Role::where(['id' => $id])->update(['roleName' => $request->roleName])) {
+        $role = Role::find($id);
+
+        if ($role->update(['roleName' => $request->roleName])) {
             return redirect('/staffroles')->with('roleNameEditSave', $request->roleName.' updated successfully.');
         }
     }

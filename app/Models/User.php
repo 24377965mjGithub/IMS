@@ -8,9 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+use OwenIt\Auditing\Contracts\Auditable;
+
+class User extends Authenticatable implements MustVerifyEmail, Auditable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'email',
         'password',
+        'email_verified_at'
     ];
 
     /**

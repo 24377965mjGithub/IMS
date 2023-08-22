@@ -8,7 +8,10 @@ use App\Models\Customers;
 class DeleteCustomerController extends Controller
 {
     public function deleteCustomer($id) {
-        if (Customers::where(['id' => $id])->delete()) {
+
+        $customer = Customers::find($id);
+
+        if ($customer->delete()) {
             return redirect('/customers')->with('customerDeleted', 'Customer deleted succesfully.');
         }
     }

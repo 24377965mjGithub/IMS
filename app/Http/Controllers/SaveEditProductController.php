@@ -19,7 +19,9 @@ class SaveEditProductController extends Controller
             'productCost' => 'required'
         ]);
 
-        if (Products::where(['id' => $id])->update([
+        $products = Products::find($id);
+
+        if ($products->update([
             'productCategoryId' => $request->productCategoryId,
             'suppliersId' => $request->suppliersId,
             'productBarCode' => $request->productBarCode,

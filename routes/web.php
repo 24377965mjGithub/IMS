@@ -31,6 +31,13 @@ use App\Http\Controllers\StaffRoleController;
 use App\Http\Controllers\SaveRoleController;
 use App\Http\Controllers\SaveEditRoleController;
 use App\Http\Controllers\DeleteRoleController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\SaveStaffController;
+use App\Http\Controllers\SaveStaffNameController;
+use App\Http\Controllers\SaveStaffEmailController;
+use App\Http\Controllers\SaveStaffPhoneNumberController;
+use App\Http\Controllers\SaveStaffPasswordController;
+use App\Http\Controllers\TerminateStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,12 +88,14 @@ Route::get('/customers', [CustomersController::class, 'customers'])->middleware(
 Route::get('/productouts', [ProductOutController::class, 'productOuts'])->middleware(['auth', 'verified']);
 Route::get('/productfailures', [ProductFailureController::class, 'productFailure'])->middleware(['auth', 'verified']);
 Route::get('/staffroles', [StaffRoleController::class, 'staffRole'])->middleware(['auth', 'verified']);
+Route::get('/staffs', [StaffController::class, 'staff'])->middleware(['auth', 'verified']);
 
 Route::get('/deletesupplier/{id}', [DeleteSupplier::class, 'deleteSupplier'])->middleware(['auth', 'verified']);
 Route::get('/deleteproductcategory/{id}', [DeleteProductCategory::class, 'deleteProductCategory'])->middleware(['auth', 'verified']);
 Route::get('/deleteproduct/{id}', [DeleteProductController::class, 'deleteProduct'])->middleware(['auth', 'verified']);
 Route::get('/deletecustomer/{id}', [DeleteCustomerController::class, 'deleteCustomer'])->middleware(['auth', 'verified']);
 Route::get('/deleterole/{id}', [DeleteRoleController::class, 'deleteRole'])->middleware(['auth', 'verified']);
+Route::get('/terminatestaff/{id}', [TerminateStaffController::class, 'terminateStaff'])->middleware(['auth', 'verified']);
 
 // posts requests
 Route::post('/addsupplier', [AddSupplierController::class, 'addSupplier'])->middleware(['auth', 'verified']);
@@ -102,5 +111,10 @@ Route::post('/saveproductout/{productCategoryId}/{suppliersId}/{productId}', [Sa
 Route::post('/saveproductfailure/{productCategoryId}/{suppliersId}/{productId}', [SaveProductFailureController::class, 'saveProductFailure'])->middleware(['auth', 'verified']);
 Route::post('/saverole', [SaveRoleController::class, 'saveRole'])->middleware(['auth', 'verified']);
 Route::post('/saveeditrole/{id}', [SaveEditRoleController::class, 'saveEditRole'])->middleware(['auth', 'verified']);
+Route::post('/savestaff', [SaveStaffController::class, 'saveStaff'])->middleware(['auth', 'verified']);
+Route::post('/savestaffname/{id}', [SaveStaffNameController::class, 'saveStaffName'])->middleware(['auth', 'verified']);
+Route::post('/savestaffemail/{id}', [SaveStaffEmailController::class, 'saveStaffEmail'])->middleware(['auth', 'verified']);
+Route::post('/savestaffphone/{id}', [SaveStaffPhoneNumberController::class, 'saveStaffPhoneNumber'])->middleware(['auth', 'verified']);
+Route::post('/savestaffpassword/{id}', [SaveStaffPasswordController::class, 'saveStaffPassword'])->middleware(['auth', 'verified']);
 
 // tests

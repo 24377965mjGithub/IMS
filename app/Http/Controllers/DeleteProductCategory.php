@@ -8,7 +8,10 @@ use App\Models\ProductCategory;
 class DeleteProductCategory extends Controller
 {
     public function deleteProductCategory($id) {
-        if (ProductCategory::where(['id' => $id])->delete()) {
+
+        $product = ProductCategory::find($id);
+
+        if ($product->delete()) {
             return redirect('/productcategories')->with('deletedProductCategory', 'Product Category Deleted Successfully');
         }
     }

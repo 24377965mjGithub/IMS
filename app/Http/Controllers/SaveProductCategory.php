@@ -14,7 +14,9 @@ class SaveProductCategory extends Controller
             'categoryPackaging' => 'required'
         ]);
 
-        if (ProductCategory::where(['id' => $request->id])->update([
+        $productCategory = ProductCategory::find($id);
+
+        if ($productCategory->update([
             'categoryName' => $request->categoryName,
             'categoryDescription' => $request->categoryDescription,
             'categoryPackaging' => $request->categoryPackaging

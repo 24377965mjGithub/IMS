@@ -3,6 +3,40 @@ h1,h2,h3,h4,h5,h6,p{
     margin: 0px;
 }
 
+/* bladeform */
+
+.bladeform {
+    background: url('../../public/assets/images/backgrounds/desktop-wallpaper-inventory-management-system-backgrounds.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.bladeform .container {
+    width: 30%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: -2px 2px 15px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -2px 2px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 2px 15px 0px rgba(0,0,0,0.75);
+}
+
+.bladeform .container h2,
+.bladeform .container h4 {
+    margin-bottom: 30px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.bladeform .container h4 {
+    font-size: 20px;
+}
+
 .navbar a h1 {
     color: #313DAA;
     font-family: Poppins;

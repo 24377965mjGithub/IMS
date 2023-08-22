@@ -93,6 +93,7 @@
                         </a>
                     </ul>
                 </li>
+                @if (Auth::user()->role == 1)
                 <li class="nav-link staff-dropdown">
                     <h3 class="dropdown-toggle" v-pre>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -115,6 +116,7 @@
                         </a>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
@@ -233,59 +235,46 @@
                                         <div class="mb-4">
                                             <h5 class="card-title fw-semibold">Log Activities</h5>
                                         </div>
-                                        <ul class="timeline-widget mb-0 position-relative mb-n5">
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
-                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe of $385.90</div>
-                                            </li>
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
-                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
-                                                href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
-                                            </div>
-                                            </li>
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1">Payment was made of $64.95 to Michael</div>
-                                            </li>
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
-                                                href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
-                                            </div>
-                                            </li>
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New arrival recorded 
-                                            </div>
-                                            </li>
-                                            <li class="timeline-item d-flex position-relative overflow-hidden">
-                                            <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                                <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                                            </div>
-                                            <div class="timeline-desc fs-3 text-dark mt-n1">Payment Done</div>
-                                            </li>
+                                        <ul class="timeline-widget mb-0 position-relative mb-n5 overflow-auto" style="height: 500px">
+
+                                            @foreach ($audits as $audit)
+                                                @if ($audit->event === 'created')
+                                                    <li class="timeline-item d-flex position-relative">
+                                                        <div class="timeline-time text-dark flex-shrink-0 text-end">{{ \Carbon\Carbon::parse($audit->created_at)->diffForHumans() }}</div>
+                                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                                                <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
+                                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                                            </div>
+                                                        <div class="timeline-desc fs-3 text-dark mt-n1">
+                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} created a new {{ $audit->auditable_type }}  "{{ $audit->new_values }}"</p>
+                                                        </div>
+                                                    </li>
+                                                @elseif ($audit->event === 'deleted')
+                                                    <li class="timeline-item d-flex position-relative overflow-hidden">
+                                                        <div class="timeline-time text-dark flex-shrink-0 text-end">{{ \Carbon\Carbon::parse($audit->created_at)->diffForHumans() }}</div>
+                                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                                                <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
+                                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                                            </div>
+                                                        <div class="timeline-desc fs-3 text-dark mt-n1">
+                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} deleted {{ $audit->auditable_type }}  "{{ $audit->new_values }}"</p>
+                                                        </div>
+                                                    </li>
+                                                @elseif ($audit->event === 'updated')
+                                                    <li class="timeline-item d-flex position-relative overflow-hidden">
+                                                        <div class="timeline-time text-dark flex-shrink-0 text-end">{{ \Carbon\Carbon::parse($audit->created_at)->diffForHumans() }}</div>
+                                                            <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                                                <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                                                                <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                                            </div>
+                                                        <div class="timeline-desc fs-3 text-dark mt-n1">
+                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} updated {{ $audit->auditable_type }} from "{{ $audit->old_values }}" to "{{ $audit->new_values }}"</p>
+                                                        </div>
+                                                    </li>
+                                                @endif
+                                                
+                                            @endforeach
+
                                         </ul>
                                         </div>
                                     </div>

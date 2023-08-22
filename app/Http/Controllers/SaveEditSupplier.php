@@ -16,7 +16,9 @@ class SaveEditSupplier extends Controller
 
         $id = $request->id;
 
-        if (Suppliers::where(['id' => $id])->update([
+        $suppliers = Suppliers::find($id);
+
+        if ($suppliers->update([
             'suppliersName' => $request->suppliersName,
             'suppliersPhoneNumber' => $request->suppliersPhoneNumber,
             'suppliersEmail' => $request->suppliersEmail

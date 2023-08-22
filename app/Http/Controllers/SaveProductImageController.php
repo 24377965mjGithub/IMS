@@ -21,8 +21,10 @@ class SaveProductImageController extends Controller
             $type = $request->productImage->getClientMimeType();
             $size = $request->productImage->getSize();
 
+            $products = Products::find($id);
+
             if (unlink('assets/images/uploads/'.Products::where(['id' => $id])->value('productImage'))) {
-                if (Products::where(['id' => $id])->update([
+                if ($products->update([
                     'productImage' => $fileName,
                 ])) {
                     $request->productImage->move(public_path('assets/images/uploads'), $fileName);

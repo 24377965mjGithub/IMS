@@ -9,9 +9,13 @@ use App\Models\ProductIns;
 class DeleteProductController extends Controller
 {
     public function deleteProduct($id) {
-        if (unlink('assets/images/uploads/'.Products::where(['id' => $id])->value('productImage'))) {
-            if (Products::where(['id' => $id])->delete()) {
-                if (ProductIns::where(['productId' => $id])->delete()) {
+
+        $products = Products::find($id);
+        $productIns = ProductIns::find($id);
+
+        if (unlink('assets/images/uploads/'.$products->value('productImage'))) {
+            if ($products->delete()) {
+                if ($productIns->delete()) {
                     return redirect('/products')->with('productDeleted', 'Product Deleted Successfully.');
                 }
             }

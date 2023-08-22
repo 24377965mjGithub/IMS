@@ -13,7 +13,9 @@ class SaveEditCustomer extends Controller
             'customersType' => 'required'
         ]);
 
-        if (Customers::where(['id' => $id])->update([
+        $customer = Customers::find($id);
+
+        if ($customer->update([
             'customersName' => $request->customersName,
             'customersType' => $request->customersType
         ])) {

@@ -312,20 +312,27 @@
                                         <td>{{ $product->productBarCode }}</td>
                                         <td><b class="font-weight-bold">{{ $product->productName }}</b></td>
                                         {{-- <td>{{ $product->productDescription }}</td> --}}
-                                        <td>
+                                        @if (App\Models\ProductCategory::where('id', $product->productCategoryId)->count() != 0)
                                             @foreach ($productCategories as $productCategory)
                                                 @if ($productCategory->id == $product->productCategoryId)
-                                                    {{ $productCategory->categoryName }}
+                                                <td>{{ $productCategory->categoryName }}</td>
                                                 @endif
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($suppliers as $supplier)
-                                                @if ($supplier->id == $product->suppliersId)
-                                                    {{ $supplier->suppliersName }}
-                                                @endif
-                                            @endforeach
-                                        </td>
+                                        @else
+                                        @endif
+
+                                        @if (App\Models\Suppliers::where('id', $product->suppliersId)->count() != 0)
+                                            <td>
+                                                @foreach ($suppliers as $supplier)
+                                                    @if ($supplier->id == $product->suppliersId)
+                                                        {{ $supplier->suppliersName }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                        @else
+                                            <td class="text-danger">(supplier is deleted or removed)</td>
+                                        @endif
+                                        
                                         <td><b class="font-weight-bold text-success">₱ {{ $product->productPrice }}</b></td>
                                         <td><b class="font-weight-bold text-danger">₱ {{ $product->productCost }} </b></td>
                                         <td>

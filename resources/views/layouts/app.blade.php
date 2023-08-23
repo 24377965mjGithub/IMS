@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/jquery.zmd.hierarchical-display.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/rating.min.css') }}">
 
-
+    
 
     {{-- theme styles --}}
     
@@ -80,14 +80,21 @@
     <!-- Scripts -->
     @vite([
         'resources/sass/app.scss',
-        'resources/js/app.js',
-        'resources/js/script.js',
-        'resources/css/app.css',
+        'resources/js/app.js'
     ])
+
 
     {{-- prod --}}
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-8065914e.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/app-71455456.css') }}"> --}}
+
+    {{-- welcome --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/welcome/css/style.css') }}">
+	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script> --}}
+    
+    {{-- custom --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
     @livewireStyles
 </head>
@@ -97,7 +104,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <h1>{{ config('app.name', 'Laravel') }}</h1>
+                    <h1 class="brandname">{{ config('app.name', 'Laravel') }}</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -125,8 +132,89 @@
                                 </li>
                             @endif --}}
                         @else
+
                             <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
+                            
+                                {{-- hidden --}}
+
+                            <li class="nav-item hidden-menus">
+                                <h3 class="nav-link" v-pre>
+                                    Customers
+                                </h3>
+                                <ul class="">
+                                    <a href="{{ url('/customers') }}" class="nav-link">
+                                        <li class="nav-link">Customer Overview</li>
+                                    </a>
+                                    <a href="{{ url('/customertypes') }}" class="nav-link">
+                                        <li class="nav-link">Customer Types</li>
+                                    </a>
+                                </ul>
+                            </li>
+
+                            <li class="nav-link hidden-menus">
+                                <h3 class="nav-link" v-pre>
+                                    Products
+                                </h3>
+                                <ul class="product-dropdown-items">
+                                    <a href="{{ url('/products') }}" class="nav-link">
+                                        <li class="nav-link">Product Overview</li>
+                                    </a>
+                                    <a href="{{ url('/productins') }}" class="nav-link">
+                                        <li class="nav-link">Product Ins</li>
+                                    </a>
+                                    <a href="{{ url('/productouts') }}" class="nav-link">
+                                        <li class="nav-link">Product Outs</li>
+                                    </a>
+                                    <a href="{{ url('/productcategories') }}" class="nav-link">
+                                        <li class="nav-link">Product Categories</li>
+                                    </a>
+                                    <a href="{{ url('/productfailures') }}" class="nav-link">
+                                        <li class="nav-link">Product Failures</li>
+                                    </a>
+                                </ul>
+                            </li>
+
+                            <li class="nav-link hidden-menus">
+                                <a href="{{ url('/suppliers') }}" class="nav-link">
+                                    <h3 class="nav-link">
+                                        Suppliers
+                                    </h3>
+                                </a>
+                            </li>
+
+                            <li class="nav-link hidden-menus">
+                                <h3 class="nav-link" v-pre>
+                                    Customers
+                                </h3>
+                                <ul class="customers-dropdown-items">
+                                    <a href="{{ url('/customers') }}" class="nav-link">
+                                        <li class="nav-link">Customer Overview</li>
+                                    </a>
+                                    <a href="{{ url('/customertypes') }}" class="nav-link">
+                                        <li class="nav-link">Customer Types</li>
+                                    </a>
+                                </ul>
+                            </li>
+
+                            @if (Auth::user()->role == 1)
+                                <li class="nav-link hidden-menus">
+                                    <h3 class="nav-link" v-pre>
+                                        Staffs
+                                    </h3>
+                                    <ul class="staffs-dropdown-items">
+                                        <a href="{{ url('/staffs') }}" class="nav-link">
+                                            <li class="nav-link">Staff Overview</li>
+                                        </a>
+                                        <a href="{{ url('/staffroles') }}" class="nav-link">
+                                            <li class="nav-link">Staff Roles</li>
+                                        </a>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- end hidden --}}
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fa fa-user"></i>
@@ -172,7 +260,7 @@
 
     {{-- mdb script --}}
 
-    <script src="{{ asset('assets/MDB-Free_4.20.0/js/mdb.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/MDB-Free_4.20.0/js/mdb.min.js') }}"></script> --}}
     <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables-select.min.js') }}"></script>
     <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables-select2.min.js') }}"></script>
     <script src="{{ asset('assets/MDB-Free_4.20.0/js/addons/datatables.min.js') }}"></script>
@@ -215,6 +303,12 @@
             }
         }
     </script>
+
+    {{-- welcome --}}
+    {{-- <script src="{{ asset('assets/welcome/js/main.min.js') }}"></script> --}}
+
+    {{-- custom --}}
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 
     {{-- end theme --}}
 

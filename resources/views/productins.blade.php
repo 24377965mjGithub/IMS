@@ -287,62 +287,83 @@
                               <tbody>
                                     {{-- loop all the product ins --}}
                                     @foreach ($productIns as $productIn)
-                                        <tr>
-                                            <th scope="row">
-                                                <input type="checkbox" name="" id="">
-                                            </th>
-                                            {{-- loop product details --}}
-                                            @foreach ($products as $product)
-                                                {{-- if product id matches --}}
-                                                @if ($productIn->productId == $product->id)
-                                                    <td>
-                                                        <img src="{{ url('/assets/images/uploads/'. $product->productImage) }}" alt="">
-                                                    </td>
-                                                    <td>{{ $product->productBarCode }}</td>
-                                                    <td><b class="font-weight-bold">{{ $product->productName}}</b></td>
-                                                    {{-- loop product categories --}}
-                                                    @foreach ($productCategories as $productCategory)
-                                                        {{-- if id matches --}}
-                                                        @if ($productCategory->id == $product->productCategoryId)
-                                                            <td>{{ $productCategory->categoryName }}</td>
+                                        @if (App\Models\Products::where('id', $productIn->productId)->count() != 0)
+                                            <tr>
+                                                <th scope="row">
+                                                    <input type="checkbox" name="" id="">
+                                                </th>
+                                                {{-- loop product details --}}
+                                                @foreach ($products as $product)
+                                                    {{-- if product id matches --}}
+                                                    @if ($productIn->productId == $product->id)
+                                                        <td>
+                                                            <img src="{{ url('/assets/images/uploads/'. $product->productImage) }}" alt="">
+                                                        </td>
+                                                        <td>{{ $product->productBarCode }}</td>
+                                                        <td><b class="font-weight-bold">{{ $product->productName}}</b></td>
+                                                        {{-- loop product categories --}}
+                                                        @if (App\Models\ProductCategory::where('id', $product->productCategoryId)->count() == 0)
+                                                            <td class="text-danger">(category is deleted or removed)</td>
+                                                        @else
+                                                            @foreach ($productCategories as $productCategory)
+                                                                {{-- if id matches --}}
+                                                                @if ($productCategory->id == $product->productCategoryId)
+                                                                    <td>{{ $productCategory->categoryName }}</td>
+                                                                @endif
+                                                            @endforeach
                                                         @endif
-                                                    @endforeach
-                                                    {{-- end loop product categories --}}
-                                                    {{-- loop product suppliers --}}
-                                                    @foreach ($suppliers as $supplier)
-                                                        {{-- if id matches --}}
-                                                        @if ($supplier->id == $product->suppliersId)
-                                                            <td>{{ $supplier->suppliersName }}</td>
+                                                        {{-- end loop product categories --}}
+                                                        {{-- loop product suppliers --}}
+                                                        @if (App\Models\Suppliers::where('id', $product->suppliersId)->count() == 0)
+                                                            <td class="text-danger">(supplier is deleted or removed)</td>
+                                                        @else
+                                                            @foreach ($suppliers as $supplier)
+                                                                {{-- if id matches --}}
+                                                                @if ($supplier->id == $product->suppliersId)
+                                                                    <td>{{ $supplier->suppliersName }}</td>
+                                                                @endif
+                                                            @endforeach
                                                         @endif
-                                                    @endforeach
-                                                    {{-- end loop product suppliers --}}
-                                            
-                                                <td><b class="font-weight-bold text-danger">{{ $productIn->quantity }}</b></td>
-                                                <td><b class="font-weight-bold text-info">₱ {{ $product->productCost }}</b></td>
-                                                <td><b class="font-weight-bold text-success">₱ {{ $productIn->quantity * $product->productCost }}</b></td>
-                                                @endif
-                                            @endforeach
-                                            {{-- endloop product details --}}
+                                                        
+                                                        {{-- end loop product suppliers --}}
+                                                
+                                                    <td><b class="font-weight-bold text-danger">{{ $productIn->quantity }}</b></td>
+                                                    <td><b class="font-weight-bold text-info">₱ {{ $product->productCost }}</b></td>
+                                                    <td><b class="font-weight-bold text-success">₱ {{ $productIn->quantity * $product->productCost }}</b></td>
+                                                    @endif
+                                                @endforeach
+                                                {{-- endloop product details --}}
 
-                                            <td>{{ $productIn->created_at->format(' d M Y H:i:s') }} ({{ $productIn->created_at->diffForHumans() }})</td>
-                                            
-                                            {{-- loop users --}}
-                                            @foreach ($users as $user)
-                                                {{-- if id matches --}}
-                                                @if ($productIn->userId == $user->id)
-                                                    <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
-                                                    {{-- loop user role --}}
-                                                    @foreach ($roles as $role)
+                                                <td>{{ $productIn->created_at->format(' d M Y H:i:s') }} ({{ $productIn->created_at->diffForHumans() }})</td>
+                                                
+                                                {{-- loop users --}}
+                                                @if (App\Models\User::where('id', $productIn->userId)->count() != 0)
+                                                    @foreach ($users as $user)
                                                         {{-- if id matches --}}
-                                                        @if ($user->role == $role->id)
-                                                            <td>{{ $role->roleName }}</td>
+                                                        @if ($productIn->userId == $user->id)
+                                                            <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
+                                                            {{-- loop user role --}}
+                                                            @if (App\Models\Role::where('id', $user->role)->count() != 0)
+                                                                @foreach ($roles as $role)
+                                                                    {{-- if id matches --}}
+                                                                    @if ($user->role == $role->id)
+                                                                        <td>{{ $role->roleName }}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                <td class="text-danger">(role is deleted or removed)</td>
+                                                            @endif
+                                                            
+                                                            {{-- end loop user role --}}
                                                         @endif
                                                     @endforeach
-                                                    {{-- end loop user role --}}
+                                                @else
+                                                    <td class="text-danger">(staff is terminated)</td>
+                                                    <td class="text-danger">(no staff role)</td>
                                                 @endif
-                                            @endforeach
-                                            {{-- end loop users --}}
-                                        </tr>
+                                                {{-- end loop users --}}
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     {{-- end loop of all product ins --}}
                               </tbody>

@@ -1,0 +1,12 @@
+Dashboard - responsive
+
+- Modify Graphs --
+- Filter Graph - Month/Day
+- Generate Reports on graphs
+
+Pages
+- Search Bars
+- checkboxes
+- generate report
+- modify logs
+- welcome page copy

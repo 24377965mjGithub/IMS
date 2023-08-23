@@ -3,10 +3,32 @@ h1,h2,h3,h4,h5,h6,p{
     margin: 0px;
 }
 
+@media(max-width: 600px) {
+    .brandname {
+        font-size: 20px !important;
+    }
+}
+
+/* hidden menus */
+
+.hidden-menus  {
+    display: none
+}
+
+@media(max-width: 767px) {
+    .hidden-menus  {
+        display: block;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
+
 /* bladeform */
 
 .bladeform {
-    background: url('../../public/assets/images/backgrounds/desktop-wallpaper-inventory-management-system-backgrounds.jpg');
+    /* background: url('http://127.0.0.1:8000/assets/images/backgrounds/desktop-wallpaper-inventory-management-system-backgrounds.jpg'); */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,6 +66,23 @@ h1,h2,h3,h4,h5,h6,p{
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+/* welcome login */
+
+.welcome-login {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.welcome-login form {
+    border: #EFEFEF 1px  solid;
+    padding: 20px;
 }
 
 /* sidebr */

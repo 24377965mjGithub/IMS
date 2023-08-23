@@ -264,57 +264,70 @@
                               <tbody>
                                 {{-- product failures --}}
                                     @foreach ($productFailures as $productFailure)
-                                        <tr>
-                                            <th scope="row">
-                                                <input type="checkbox" name="" id="">
-                                            </th>
+                                        @if (App\Models\Products::where('id', $productFailure->productId)->count() != 0)
+                                            <tr>
+                                                <th scope="row">
+                                                    <input type="checkbox" name="" id="">
+                                                </th>
 
-                                            {{-- query product details --}}
+                                                {{-- query product details --}}
 
-                                            @foreach ($products as $product)
-                                                @if ($productFailure->productId == $product->id)
-                                                    <td scope="col">
-                                                        <img src="{{ url('assets/images/uploads/'.$product->productImage) }}" alt="">
-                                                    </td>
-                                                    <td scope="col">{{ $product->productBarCode }}</td>
-                                                    <td scope="col">{{ $product->productName }}</td>
-                                                    {{-- query product category --}}
-                                                    @foreach ($productCategories as $productCategory)
-                                                        @if ($productCategory->id == $product->productCategoryId)
-                                                            <td scope="col">{{ $productCategory->categoryName }}</td>
+                                                @foreach ($products as $product)
+                                                    @if ($productFailure->productId == $product->id)
+                                                        <td scope="col">
+                                                            <img src="{{ url('assets/images/uploads/'.$product->productImage) }}" alt="">
+                                                        </td>
+                                                        <td scope="col">{{ $product->productBarCode }}</td>
+                                                        <td scope="col">{{ $product->productName }}</td>
+                                                        {{-- query product category --}}
+                                                        @if (App\Models\ProductCategory::where('id', $productFailure->productCategoryId))
+                                                            @foreach ($productCategories as $productCategory)
+                                                                @if ($productCategory->id == $product->productCategoryId)
+                                                                    <td scope="col">{{ $productCategory->categoryName }}</td>
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            <td class="text-danger">(category is deleted or removed)</td>
+                                                        @endif
+                                                        {{-- end queyr product category --}}
+                                                        <td scope="col"><b class="font-weight-bold text-danger">{{ $productFailure->quantity }}</b></td>
+                                                        <td scope="col"><b class="font-weight-bold text-primary">₱ {{ $product->productPrice }}</b></td>
+                                                        <td scope="col"><b class="font-weight-bold text-success">₱ {{ $productFailure->quantity * $product->productPrice }}</b></td>
+                                                    @endif
+                                                @endforeach
+
+                                                {{-- end query product details --}}
+                                                
+                                                <td scope="col">{{ $productFailure->reason }}</td>
+                                                <td scope="col">{{ $productFailure->created_at->format(' d M Y H:i:s') }} ({{ $productFailure->created_at->diffForHumans() }})</td>
+                                                
+                                                {{-- query users --}}
+
+                                                @if (App\Models\User::where('id', $productFailure->userId)->count() != 0)
+                                                    @foreach ($users as $user)
+                                                        @if ($productFailure->userId  == $user->id)
+                                                            <td scope="col">{{ $user->lastname }}, {{ $user->firstname }}</td>
+                                                            
+                                                            {{-- query user role --}}
+                                                            @if (App\Models\Role::where('id', $user->role)->count() !=0)
+                                                                @foreach ($roles as $role)
+                                                                    @if ($user->role == $role->id)
+                                                                        <td scope="col">{{ $role->roleName }}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                <td class="text-danger">(role is deleted or removed)</td>
+                                                            @endif
+                                                            {{-- end query user role --}}
                                                         @endif
                                                     @endforeach
-                                                    {{-- end queyr product category --}}
-                                                    <td scope="col"><b class="font-weight-bold text-danger">{{ $productFailure->quantity }}</b></td>
-                                                    <td scope="col"><b class="font-weight-bold text-primary">₱ {{ $product->productPrice }}</b></td>
-                                                    <td scope="col"><b class="font-weight-bold text-success">₱ {{ $productFailure->quantity * $product->productPrice }}</b></td>
+                                                @else
+                                                    <td class="text-danger">(staff is terminated)</td>
                                                 @endif
-                                            @endforeach
 
-                                            {{-- end query product details --}}
-                                            
-                                            <td scope="col">{{ $productFailure->reason }}</td>
-                                            <td scope="col">{{ $productFailure->created_at->format(' d M Y H:i:s') }} ({{ $productFailure->created_at->diffForHumans() }})</td>
-                                            
-                                            {{-- query users --}}
-
-                                            @foreach ($users as $user)
-                                                @if ($productFailure->userId  == $user->id)
-                                                    <td scope="col">{{ $user->lastname }}, {{ $user->firstname }}</td>
-                                                    
-                                                    {{-- query user role --}}
-                                                    @foreach ($roles as $role)
-                                                        @if ($user->role == $role->id)
-                                                            <td scope="col">{{ $role->roleName }}</td>
-                                                        @endif
-                                                    @endforeach
-                                                    {{-- end query user role --}}
-                                                    
-                                                @endif
-                                            @endforeach
-
-                                            {{-- end query --}}
-                                        </tr>
+                                                {{-- end query --}}
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 {{-- end product failures --}}
                               </tbody>

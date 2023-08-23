@@ -287,63 +287,82 @@
                               <tbody>
                                 {{-- query product outs --}}
                                     @foreach ($productOuts as $productOut)
-                                        <tr>
-                                            <th scope="row">
-                                                <input type="checkbox" name="" id="">
-                                            </th>
+                                        @if (App\Models\Products::where('id', $productOut->productId)->count() != 0)
+                                            <tr>
+                                                <th scope="row">
+                                                    <input type="checkbox" name="" id="">
+                                                </th>
 
-                                            {{-- query product details --}}
+                                                {{-- query product details --}}
 
-                                            @foreach ($products as $product)
-                                                @if ($productOut->productId == $product->id)
-                                                    <td>
-                                                        <img src="{{ url('assets/images/uploads/'.$product->productImage) }}" alt="">
-                                                    </td>
-                                                    <td>{{ $product->productBarCode }}</td>
-                                                    <td>{{ $product->productName }}</td>
-                                                    @foreach ($productCategories as $productCategory)
-                                                        @if ($productCategory->id == $product->productCategoryId)
-                                                            <td>{{ $productCategory->categoryName }}</td>
+                                                @foreach ($products as $product)
+                                                    @if ($productOut->productId == $product->id)
+                                                        <td>
+                                                            <img src="{{ url('assets/images/uploads/'.$product->productImage) }}" alt="">
+                                                        </td>
+                                                        <td>{{ $product->productBarCode }}</td>
+                                                        <td>{{ $product->productName }}</td>
+                                                        @if (App\Models\ProductCategory::where('id', $productOut->productCategoryId)->count() != 0)
+                                                            @foreach ($productCategories as $productCategory)
+                                                                @if ($productCategory->id == $product->productCategoryId)
+                                                                    <td>{{ $productCategory->categoryName }}</td>
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            <td class="text-danger">(category is deleted or removed)</td>
+                                                        @endif
+                                                        <td><b class="font-weight-bold text-info">{{ $productOut->quantity }}</b></td>
+                                                        <td><b class="font-weight-bold text-primary">₱ {{ $product->productPrice }}</b></td>
+                                                        <td><b class="font-weight-bold text-success">₱ {{ $productOut->quantity * $product->productPrice }}</b></td>
+                                                    @endif
+                                                @endforeach
+                                                
+                                                {{-- end query product details --}}
+
+                                                {{-- query customer --}}
+
+                                                @if (App\Models\Customers::where('id', $productOut->customersId)->count() != 0)
+                                                    @foreach ($customers as $customer)
+                                                        @if ($productOut->customersId == $customer->id)
+                                                            <td>{{  $customer->customersName }}</td>
                                                         @endif
                                                     @endforeach
-                                                    <td><b class="font-weight-bold text-info">{{ $productOut->quantity }}</b></td>
-                                                    <td><b class="font-weight-bold text-primary">₱ {{ $product->productPrice }}</b></td>
-                                                    <td><b class="font-weight-bold text-success">₱ {{ $productOut->quantity * $product->productPrice }}</b></td>
+                                                @else
+                                                    <td class="text-danger">(customer is deleted or removed)</td>
                                                 @endif
-                                            @endforeach
-                                            
-                                            {{-- end query product details --}}
 
-                                            {{-- query customer --}}
+                                                {{-- end query customer --}}
 
-                                            @foreach ($customers as $customer)
-                                                @if ($productOut->customersId == $customer->id)
-                                                    <td>{{  $customer->customersName }}</td>
+                                                <td>{{ $productOut->created_at->format(' d M Y H:i:s') }} ({{ $productOut->created_at->diffForHumans() }})</td>
+
+                                                {{-- query users --}}
+
+                                                @if (App\Models\User::where('id', $productOut->userId)->count() != 0)
+                                                    @foreach ($users as $user)
+                                                        @if ($productOut->userId == $user->id)
+                                                            <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <td class="text-danger">(staff is terminated)</td>
                                                 @endif
-                                            @endforeach
+                                                
+                                                        
+                                                {{-- end query users --}}
 
-                                            {{-- end query customer --}}
-
-                                            <td>{{ $productOut->created_at->format(' d M Y H:i:s') }} ({{ $productOut->created_at->diffForHumans() }})</td>
-
-                                            {{-- query users --}}
-
-                                            @foreach ($users as $user)
-                                                @if ($productOut->userId == $user->id)
-                                                    <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
+                                                {{-- query user role --}}
+                                                @if (App\Models\Role::where('id', $productOut->userRoleId)->count() != 0)
+                                                    @foreach ($roles as $role)
+                                                        @if ($productOut->userRoleId == $role->id)
+                                                            <td>{{ $role->roleName }}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <td class="text-danger">(role is deleted or removed)</td>
                                                 @endif
-                                            @endforeach
-                                                    
-                                            {{-- end query users --}}
-
-                                            {{-- query user role --}}
-                                            @foreach ($roles as $role)
-                                                @if ($productOut->userRoleId == $role->id)
-                                                    <td>{{ $role->roleName }}</td>
-                                                @endif
-                                            @endforeach
-                                            {{-- end query user role --}}
-                                        </tr>
+                                                {{-- end query user role --}}
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 {{-- end product outs --}}
                               </tbody>

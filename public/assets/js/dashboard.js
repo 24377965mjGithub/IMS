@@ -14,7 +14,7 @@ $(function () {
     Array.prototype.max = function() {
       return Math.max.apply(null, this);
     };
-    
+
     Array.prototype.min = function() {
       return Math.min.apply(null, this);
     };
@@ -28,10 +28,6 @@ $(function () {
 
       let deliveryDate = date_d.toLocaleDateString("en-US", options);
 
-      // if (!globalDateHolder.includes(deliveryDate)) {
-      //   globalDateHolder.push(deliveryDate)
-      // }
-
       res.products.forEach(element2 => {
         if (element.productId === element2.id) {
           delivery.push({
@@ -40,12 +36,10 @@ $(function () {
             'date': deliveryDate
           });
         }
-  });
+      });
     });
 
     // end query product ins ================================================================================================
-
-    // globalDateHolder.push(dateNowString);
 
     // query product outs ====================================================================================================
 
@@ -62,13 +56,26 @@ $(function () {
       // query products
 
       res.products.forEach(element2 => {
+        res.customerTypes.forEach(discount => {
+          if(element.customersTypeId == discount.id) {
             if (element.productId === element2.id) {
-              sales.push({
-                'item': element2.productName,
-                'sale': element.quantity * element2.productPrice,
-                'date': salesDate
-              });
+              if (!discount.discountPercentage) {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': Math.round((element.quantity * element2.productPrice + Number.EPSILON) * 100) / 100,
+                  'date': salesDate
+                });
+              } else {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': (element.quantity * element2.productPrice - element.quantity * element2.productPrice * parseFloat("0."+discount.discountPercentage)).toFixed(1),
+                  'date': salesDate
+                });
+              }
             }
+          }
+        });
+
       });
     });
 
@@ -114,11 +121,9 @@ $(function () {
 
     var chart = {
       series: [
-        // { name: "Earnings this month:", data: [50, 390, 300, 350, 390, 180, 355, 390] },
-        // { name: "Expense this month:", data: [20, 250, 325, 215, 250, 310, 280, 250] },
         { name: "Earnings this day", data: saleHolder },
       ],
-  
+
       chart: {
         type: "bar",
         height: 345,
@@ -128,11 +133,11 @@ $(function () {
         fontFamily: 'inherit',
         sparkline: { enabled: false },
       },
-  
-  
+
+
       colors: ["#5D87FF", "#b30000"],
-  
-  
+
+
       plotOptions: {
         bar: {
           horizontal: false,
@@ -143,17 +148,17 @@ $(function () {
         },
       },
       markers: { size: 0 },
-  
+
       dataLabels: {
         enabled: false,
       },
-  
-  
+
+
       legend: {
         show: true,
       },
-  
-  
+
+
       grid: {
         borderColor: "rgba(0,0,0,0.1)",
         strokeDashArray: 3,
@@ -163,17 +168,16 @@ $(function () {
           },
         },
       },
-  
+
       xaxis: {
         type: "category",
-        // categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
         categories: globalDateHolder,
         labels: {
           style: { cssClass: "grey--text lighten-2--text fill-color" },
         },
       },
-  
-  
+
+
       yaxis: {
         show: true,
         min: 0,
@@ -191,10 +195,10 @@ $(function () {
         lineCap: "butt",
         colors: ["transparent"],
       },
-  
-  
-      tooltip: { theme: "light" },
-  
+
+
+      tooltip: { theme: "dark" },
+
       responsive: [
         {
           breakpoint: 600,
@@ -238,7 +242,7 @@ $(function () {
     Array.prototype.max_delivery = function() {
       return Math.max.apply(null, this);
     };
-    
+
     Array.prototype.min = function() {
       return Math.min.apply(null, this);
     };
@@ -300,7 +304,7 @@ $(function () {
         // { name: "Earnings this day:", data: saleHolder },
         { name: "Expenses this day:", data: deliveryHolder },
       ],
-  
+
       chart: {
         type: "bar",
         height: 345,
@@ -310,11 +314,11 @@ $(function () {
         fontFamily: 'inherit',
         sparkline: { enabled: false },
       },
-  
-  
+
+
       colors: ["#b30000"],
-  
-  
+
+
       plotOptions: {
         bar: {
           horizontal: false,
@@ -325,17 +329,17 @@ $(function () {
         },
       },
       markers: { size: 0 },
-  
+
       dataLabels: {
         enabled: false,
       },
-  
-  
+
+
       legend: {
         show: false,
       },
-  
-  
+
+
       grid: {
         borderColor: "rgba(0,0,0,0.1)",
         strokeDashArray: 3,
@@ -345,7 +349,7 @@ $(function () {
           },
         },
       },
-  
+
       xaxis: {
         type: "category",
         // categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
@@ -354,8 +358,8 @@ $(function () {
           style: { cssClass: "grey--text lighten-2--text fill-color" },
         },
       },
-  
-  
+
+
       yaxis: {
         show: true,
         min: 0,
@@ -373,10 +377,10 @@ $(function () {
         lineCap: "butt",
         colors: ["transparent"],
       },
-  
-  
+
+
       tooltip: { theme: "light" },
-  
+
       responsive: [
         {
           breakpoint: 600,

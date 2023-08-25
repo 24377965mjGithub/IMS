@@ -16,6 +16,7 @@ class SaveEditProductController extends Controller
             'productDescription'=> 'max:225',
             'productPrice' => 'required',
             'productQuantity' => 'required',
+            'productUnit' => 'required',
             'productCost' => 'required'
         ]);
 
@@ -29,6 +30,7 @@ class SaveEditProductController extends Controller
             'productDescription' => $request->productDescription,
             'productPrice' => $request->productPrice,
             'productQuantity' => $request->productQuantity,
+            'productUnit' => $request->productUnit,
             'productCost' => $request->productCost
         ])) {
             return redirect('/products')->with('productUpadated', $request->productName." Updated Successfully.");

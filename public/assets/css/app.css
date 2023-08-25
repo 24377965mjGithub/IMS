@@ -25,6 +25,12 @@ h1,h2,h3,h4,h5,h6,p{
     }
 }
 
+/* active */
+
+.active {
+    color:#313DAA;
+}
+
 /* bladeform */
 
 .bladeform {
@@ -100,7 +106,7 @@ h1,h2,h3,h4,h5,h6,p{
 .sidebar .product-dropdown-items,
 .sidebar .customers-dropdown-items,
 .sidebar .staffs-dropdown-items {
-    display: none;
+    display: block;
 }
 
 /* main */

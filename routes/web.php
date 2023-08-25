@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddCustomerController;
+use App\Http\Controllers\AddDiscountController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ use App\Http\Controllers\StaffRoleController;
 use App\Http\Controllers\SaveRoleController;
 use App\Http\Controllers\SaveEditRoleController;
 use App\Http\Controllers\DeleteRoleController;
+use App\Http\Controllers\DiscountedController;
+use App\Http\Controllers\RemoveDiscountController;
+use App\Http\Controllers\SaveEditDiscountController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SaveStaffController;
 use App\Http\Controllers\SaveStaffNameController;
@@ -38,7 +42,6 @@ use App\Http\Controllers\SaveStaffEmailController;
 use App\Http\Controllers\SaveStaffPhoneNumberController;
 use App\Http\Controllers\SaveStaffPasswordController;
 use App\Http\Controllers\TerminateStaffController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,13 +69,13 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
@@ -89,6 +92,7 @@ Route::get('/productouts', [ProductOutController::class, 'productOuts'])->middle
 Route::get('/productfailures', [ProductFailureController::class, 'productFailure'])->middleware(['auth', 'verified']);
 Route::get('/staffroles', [StaffRoleController::class, 'staffRole'])->middleware(['auth', 'verified']);
 Route::get('/staffs', [StaffController::class, 'staff'])->middleware(['auth', 'verified']);
+Route::get('/discounted', [DiscountedController::class, 'discounted'])->middleware(['auth', 'verified']);
 
 Route::get('/deletesupplier/{id}', [DeleteSupplier::class, 'deleteSupplier'])->middleware(['auth', 'verified']);
 Route::get('/deleteproductcategory/{id}', [DeleteProductCategory::class, 'deleteProductCategory'])->middleware(['auth', 'verified']);
@@ -96,6 +100,7 @@ Route::get('/deleteproduct/{id}', [DeleteProductController::class, 'deleteProduc
 Route::get('/deletecustomer/{id}', [DeleteCustomerController::class, 'deleteCustomer'])->middleware(['auth', 'verified']);
 Route::get('/deleterole/{id}', [DeleteRoleController::class, 'deleteRole'])->middleware(['auth', 'verified']);
 Route::get('/terminatestaff/{id}', [TerminateStaffController::class, 'terminateStaff'])->middleware(['auth', 'verified']);
+Route::get('/removediscount/{id}', [RemoveDiscountController::class, 'removeDiscount'])->middleware(['auth', 'verified']);
 
 // posts requests
 Route::post('/addsupplier', [AddSupplierController::class, 'addSupplier'])->middleware(['auth', 'verified']);
@@ -116,5 +121,7 @@ Route::post('/savestaffname/{id}', [SaveStaffNameController::class, 'saveStaffNa
 Route::post('/savestaffemail/{id}', [SaveStaffEmailController::class, 'saveStaffEmail'])->middleware(['auth', 'verified']);
 Route::post('/savestaffphone/{id}', [SaveStaffPhoneNumberController::class, 'saveStaffPhoneNumber'])->middleware(['auth', 'verified']);
 Route::post('/savestaffpassword/{id}', [SaveStaffPasswordController::class, 'saveStaffPassword'])->middleware(['auth', 'verified']);
+Route::post('/adddiscount', [AddDiscountController::class, 'addDiscount'])->middleware(['auth', 'verified']);
+Route::post('/saveeditdiscount/{id}', [SaveEditDiscountController::class, 'saveEditDiscount'])->middleware(['auth', 'verified']);
 
 // tests

@@ -21,6 +21,7 @@ class Products extends Model implements Auditable
         'productDescription',
         'productPrice',
         'productQuantity',
+        'productUnit',
         'productStatus',
         'productCost',
     ];

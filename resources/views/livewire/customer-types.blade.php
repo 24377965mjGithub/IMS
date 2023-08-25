@@ -39,19 +39,19 @@
                     </h3>
                     <ul class="product-dropdown-items">
                         <a href="{{ url('/products') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Overview</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Overview <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\Products::count() }}</sup></h5></li>
                         </a>
                         <a href="{{ url('/productins') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Ins</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Ins <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductIns::count() }}</sup></h5></li>
                         </a>
                         <a href="{{ url('/productouts') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Outs</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Outs <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductOuts::count() }}</sup></h5></li>
                         </a>
                         <a href="{{ url('/productcategories') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Categories</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Categories <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductCategory::count() }}</sup></h5></li>
                         </a>
                         <a href="{{ url('/productfailures') }}" class="nav-link">
-                            <li class="nav-link"><h4>Product Failures</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Failures <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductFailure::count() }}</sup></h5></li>
                         </a>
                     </ul>
                 </li>
@@ -65,7 +65,7 @@
                                 <path d="M28.4394 14.7547C27.473 14.5035 26.9199 14.3455 26.5404 13.6126L25.2714 11.0432C24.8917 10.3103 23.9057 9.71058 23.0805 9.71058H21.3448C21.3448 9.71058 21.1113 9.71545 21.1113 9.48048C21.1113 8.94175 21.1113 7.3256 21.1113 7.3256C21.1113 6.49024 20.6386 5.80673 19.633 5.80673H5.48731C4.04765 5.80673 3.36414 6.49032 3.36414 7.3256V8.67603C3.36414 8.67603 3.36414 9.07767 3.75287 9.07767C5.73186 9.07767 11.6689 9.07767 11.6689 9.07767C12.4094 9.07767 13.0119 9.68005 13.0119 10.4206V10.8235C13.0119 11.564 12.4094 12.1664 11.6689 12.1664H3.75287C3.75287 12.1664 3.36414 12.1341 3.36414 12.5537C3.36414 12.7621 3.36414 12.902 3.36414 13.0181C3.36414 13.3874 3.87035 13.3872 3.87035 13.3872H9.19904C9.93956 13.3872 10.542 13.9897 10.542 14.7301V15.133C10.542 15.8735 9.93956 16.4759 9.19904 16.4759H3.95443C3.95443 16.4759 3.36414 16.465 3.36414 16.935C3.36414 17.7508 3.36414 20.1981 3.36414 20.1981C3.36414 21.0334 4.04765 21.717 4.883 21.717C4.883 21.717 5.51223 21.717 5.72198 21.717C5.91225 21.717 5.94028 21.611 5.94028 21.5578C5.94028 19.6639 7.4812 18.1234 9.37508 18.1234C11.2691 18.1234 12.81 19.6641 12.81 21.5578C12.81 21.6112 12.7948 21.717 12.9403 21.717C14.6033 21.717 19.7109 21.717 19.7109 21.717C19.8451 21.717 19.8397 21.6039 19.8397 21.5578C19.8397 19.6639 21.3805 18.1234 23.2745 18.1234C25.1684 18.1234 26.7093 19.6641 26.7093 21.5578C26.7093 21.6112 26.708 21.717 26.792 21.717C27.5545 21.717 28.499 21.717 28.499 21.717C29.3246 21.717 29.9999 21.0417 29.9999 20.2161V17.3647C30 14.9633 29.2418 14.9633 28.4394 14.7547ZM25.5834 14.6212C25.5834 14.6212 22.396 14.6212 21.3112 14.6212C21.1347 14.6212 21.1113 14.4494 21.1113 14.4494V10.8906C21.1113 10.8906 21.1013 10.7539 21.3279 10.7539C21.6327 10.7539 22.5469 10.7539 22.5469 10.7539C23.2814 10.7539 24.1587 11.2876 24.4964 11.9397L25.6257 14.226C25.6733 14.318 25.7241 14.3997 25.7785 14.4729C25.8186 14.5266 25.7514 14.6212 25.5834 14.6212Z" fill="black"/>
                                 <path d="M9.87047 15.133C9.87047 15.5023 9.56832 15.8045 9.19906 15.8045H0.671415C0.302078 15.8045 0 15.5023 0 15.133V14.7301C0 14.3609 0.302151 14.0587 0.671415 14.0587H9.19906C9.56839 14.0587 9.87047 14.3609 9.87047 14.7301V15.133Z" fill="black"/>
                             </svg> 
-                            Suppliers
+                            Suppliers <sup class="badge rounded-pill text-bg-primary" style="font-size: 10px">{{ App\Models\Suppliers::count() }}</sup>
                         </h3>
                     </a>
                 </li>
@@ -83,10 +83,10 @@
                     </h3>
                     <ul class="customers-dropdown-items">
                         <a href="{{ url('/customers') }}" class="nav-link">
-                            <li class="nav-link"><h4>Customer Overview</h4></li>
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Customer Overview <sup class="badge rounded-pill text-bg-warning" style="font-size: 10px">{{ App\Models\Customers::count() }}</sup></h5></li>
                         </a>
-                        <a href="{{ url('/customertypes') }}" class="nav-link">
-                            <li class="nav-link"><h4>Customer Types</h4></li>
+                        <a href="{{ url('/customertypes') }}" class="nav-link active">
+                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Customer Types <sup class="badge rounded-pill text-bg-warning" style="font-size: 10px">{{ App\Models\CustomerType::count() }}</sup></h5></li>
                         </a>
                     </ul>
                 </li>
@@ -106,10 +106,34 @@
                         </h3>
                         <ul class="staffs-dropdown-items">
                             <a href="{{ url('/staffs') }}" class="nav-link">
-                                <li class="nav-link"><h4>Staff Overview</h4></li>
+                                <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Staff Overview <sup class="badge rounded-pill text-bg-success" style="font-size: 10px">{{ App\Models\User::count() }}</sup></h5></li>
                             </a>
                             <a href="{{ url('/staffroles') }}" class="nav-link">
-                                <li class="nav-link"><h4>Staff Roles</h4></li>
+                                <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Staff Roles <sup class="badge rounded-pill text-bg-success" style="font-size: 10px">{{ App\Models\Role::count() }}</sup></h5></li>
+                            </a>
+                        </ul>
+                    </li>
+                    <li class="nav-link">
+                        <h3 class="dropdown-toggle" v-pre>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                <g clip-path="url(#clip0_72_9)">
+                                <path d="M9.91931 15.8788H20.4661C20.9521 15.8788 21.345 15.4856 21.345 14.9999V4.39451C21.345 3.90883 20.9521 3.51561 20.4661 3.51561H17.8294V2.63671C17.8294 1.18286 16.6466 0 15.1927 0C13.7389 0 12.556 1.18286 12.556 2.63671V3.51561H9.91931C9.43362 3.51561 9.04041 3.90883 9.04041 4.39451V14.9999C9.04041 15.4856 9.43362 15.8788 9.91931 15.8788ZM14.3138 2.63671C14.3138 2.15171 14.7086 1.75781 15.1927 1.75781C15.6768 1.75781 16.0716 2.15171 16.0716 2.63671V3.51561H14.3138V2.63671Z" fill="black"/>
+                                <path d="M27.997 14.5449C27.8391 14.2824 27.5523 14.121 27.2451 14.121C25.6965 14.121 24.2759 14.9805 23.557 16.3522L20.861 21.4974C20.4027 22.3695 19.5083 22.9101 18.5248 22.9101H12.556C12.0703 22.9101 11.6771 22.5169 11.6771 22.0312C11.6771 21.5455 12.0703 21.1523 12.556 21.1523H18.5245C18.8525 21.1523 19.1512 20.9721 19.3041 20.681C19.4563 20.3903 19.9161 19.5126 20.3114 18.7582C20.4359 18.5206 20.4272 18.2352 20.2883 18.0056C20.1491 17.7763 19.9004 17.6367 19.6321 17.6367H10.4961C9.32193 17.6367 8.21987 18.0942 7.38903 18.9241L2.19115 24.122C1.84782 24.4653 1.84782 25.0215 2.19115 25.3648L6.58566 29.7424C6.75732 29.9141 6.98231 30.0001 7.20707 30.0001C7.43183 30.0001 7.65682 29.9141 7.82848 29.7424L11.1621 26.4257H18.5245C20.8198 26.4257 22.9088 25.1623 23.9749 23.1289L28.0226 15.4085C28.1668 15.1364 28.1565 14.8086 27.997 14.5449Z" fill="black"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_72_9">
+                                <rect width="30" height="30" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                            Discounts <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">new</sup>
+                        </h3>
+                        <ul class="">
+                            <a href="{{ url('/discounted') }}" class="nav-link">
+                                <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
+                            </a>
+                            <a href="{{ url('/staffs') }}" class="nav-link">
+                                <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Vouchers <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">23</sup></h5></li>
                             </a>
                         </ul>
                     </li>
@@ -200,6 +224,9 @@
                                                     {{ session('message') }}
                                                     <i class="fa fa-times" data-dismiss="alert" style="float: right" aria-label="close"></i>
                                                 </p>
+                                                <script>
+                                                    window.location.reload();
+                                                </script>
                                             @endif
 
                                             {{-- end msgs --}}
@@ -240,7 +267,13 @@
                                         <th scope="row">
                                             <input type="checkbox" name="" id="">
                                         </th>
-                                        <td>{{ $customerType->customersType }}</td>
+                                        {{-- display discounted if discounted --}}
+                                        @if ($customerType->isDiscounted)
+                                            <td>{{ $customerType->customersType }} <b class="text-success">(discounted by {{ $customerType->discountPercentage }}%)</b></td>
+                                        @else
+                                            <td>{{ $customerType->customersType }}</td>
+                                        @endif
+                                        {{-- end display discounted if discounted --}}
                                         <td>{{ $customerType->created_at->format(' d M Y H:i:s') }}</td>
                                         <td>
                                             <div class="btn-group">
@@ -316,8 +349,13 @@
                                                         </p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" wire:click="delete({{ $customerType->id }})" data-dismiss="modal"><i class="fa fa-check"></i> Yes</button>
+                                                        <button type="button" class="btn btn-success" wire:click="delete({{ $customerType->id }})" data-dismiss="modal" onclick="window.location.reload()"><i class="fa fa-check"></i> Yes</button>
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                                        {{-- <script>
+                                                            document.getElementById('deleteCustomerType').addEventListener('click', function () {
+                                                                window.location.reload();
+                                                            })
+                                                        </script> --}}
                                                     </div>
                                                   </div>
                                                 </div>
@@ -336,4 +374,5 @@
             </div>
         </div>
     </div>
+    
 </div>

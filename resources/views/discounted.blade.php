@@ -20,7 +20,7 @@
                                 <rect width="30" height="30" fill="white"/>
                                 </clipPath>
                                 </defs>
-                            </svg> 
+                            </svg>
                             Dashboard
                         </h3>
                     </a>
@@ -37,7 +37,7 @@
                             <rect width="30" height="30" fill="white"/>
                             </clipPath>
                             </defs>
-                        </svg> 
+                        </svg>
                         Products
                     </h3>
                     <ul class="product-dropdown-items">
@@ -50,7 +50,7 @@
                         <a href="{{ url('/productouts') }}" class="nav-link">
                             <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Outs <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductOuts::count() }}</sup></h5></li>
                         </a>
-                        <a href="{{ url('/productcategories') }}" class="nav-link active">
+                        <a href="{{ url('/productcategories') }}" class="nav-link">
                             <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Product Categories <sup class="badge rounded-pill text-bg-info" style="font-size: 10px">{{ App\Models\ProductCategory::count() }}</sup></h5></li>
                         </a>
                         <a href="{{ url('/productfailures') }}" class="nav-link">
@@ -67,7 +67,7 @@
                                 <path d="M12.3404 10.8234C12.3404 11.1927 12.0382 11.4949 11.6689 11.4949H2.40268C2.03334 11.4949 1.73126 11.1927 1.73126 10.8234V10.4205C1.73126 10.0512 2.03341 9.74908 2.40268 9.74908H11.6689C12.0383 9.74908 12.3404 10.0512 12.3404 10.4205V10.8234Z" fill="black"/>
                                 <path d="M28.4394 14.7547C27.473 14.5035 26.9199 14.3455 26.5404 13.6126L25.2714 11.0432C24.8917 10.3103 23.9057 9.71058 23.0805 9.71058H21.3448C21.3448 9.71058 21.1113 9.71545 21.1113 9.48048C21.1113 8.94175 21.1113 7.3256 21.1113 7.3256C21.1113 6.49024 20.6386 5.80673 19.633 5.80673H5.48731C4.04765 5.80673 3.36414 6.49032 3.36414 7.3256V8.67603C3.36414 8.67603 3.36414 9.07767 3.75287 9.07767C5.73186 9.07767 11.6689 9.07767 11.6689 9.07767C12.4094 9.07767 13.0119 9.68005 13.0119 10.4206V10.8235C13.0119 11.564 12.4094 12.1664 11.6689 12.1664H3.75287C3.75287 12.1664 3.36414 12.1341 3.36414 12.5537C3.36414 12.7621 3.36414 12.902 3.36414 13.0181C3.36414 13.3874 3.87035 13.3872 3.87035 13.3872H9.19904C9.93956 13.3872 10.542 13.9897 10.542 14.7301V15.133C10.542 15.8735 9.93956 16.4759 9.19904 16.4759H3.95443C3.95443 16.4759 3.36414 16.465 3.36414 16.935C3.36414 17.7508 3.36414 20.1981 3.36414 20.1981C3.36414 21.0334 4.04765 21.717 4.883 21.717C4.883 21.717 5.51223 21.717 5.72198 21.717C5.91225 21.717 5.94028 21.611 5.94028 21.5578C5.94028 19.6639 7.4812 18.1234 9.37508 18.1234C11.2691 18.1234 12.81 19.6641 12.81 21.5578C12.81 21.6112 12.7948 21.717 12.9403 21.717C14.6033 21.717 19.7109 21.717 19.7109 21.717C19.8451 21.717 19.8397 21.6039 19.8397 21.5578C19.8397 19.6639 21.3805 18.1234 23.2745 18.1234C25.1684 18.1234 26.7093 19.6641 26.7093 21.5578C26.7093 21.6112 26.708 21.717 26.792 21.717C27.5545 21.717 28.499 21.717 28.499 21.717C29.3246 21.717 29.9999 21.0417 29.9999 20.2161V17.3647C30 14.9633 29.2418 14.9633 28.4394 14.7547ZM25.5834 14.6212C25.5834 14.6212 22.396 14.6212 21.3112 14.6212C21.1347 14.6212 21.1113 14.4494 21.1113 14.4494V10.8906C21.1113 10.8906 21.1013 10.7539 21.3279 10.7539C21.6327 10.7539 22.5469 10.7539 22.5469 10.7539C23.2814 10.7539 24.1587 11.2876 24.4964 11.9397L25.6257 14.226C25.6733 14.318 25.7241 14.3997 25.7785 14.4729C25.8186 14.5266 25.7514 14.6212 25.5834 14.6212Z" fill="black"/>
                                 <path d="M9.87047 15.133C9.87047 15.5023 9.56832 15.8045 9.19906 15.8045H0.671415C0.302078 15.8045 0 15.5023 0 15.133V14.7301C0 14.3609 0.302151 14.0587 0.671415 14.0587H9.19906C9.56839 14.0587 9.87047 14.3609 9.87047 14.7301V15.133Z" fill="black"/>
-                            </svg> 
+                            </svg>
                             Suppliers <sup class="badge rounded-pill text-bg-primary" style="font-size: 10px">{{ App\Models\Suppliers::count() }}</sup>
                         </h3>
                     </a>
@@ -104,7 +104,7 @@
                                 <path d="M4.54317 8.50512C3.0499 8.50512 1.83502 9.71994 1.83502 11.2133V15.0772H6.59875V10.7638C6.59875 9.94735 6.80489 9.17819 7.16729 8.50512H4.54317Z" fill="black"/>
                                 <path d="M22.2137 1.57078C20.534 1.57078 19.1675 2.93731 19.1675 4.6169C19.1675 5.14371 19.3021 5.63971 19.5384 6.07242C20.6169 6.28307 21.566 6.85735 22.2539 7.66195C23.915 7.64028 25.2598 6.28301 25.2598 4.6169C25.2598 2.93725 23.8933 1.57078 22.2137 1.57078Z" fill="black"/>
                                 <path d="M25.4568 8.50512H22.8327C23.1951 9.17819 23.4012 9.94735 23.4012 10.7638V15.0772H28.165V11.2132C28.165 9.71994 26.9501 8.50512 25.4568 8.50512Z" fill="black"/>
-                            </svg> 
+                            </svg>
                             Staffs
                         </h3>
                         <ul class="staffs-dropdown-items">
@@ -132,7 +132,7 @@
                             Discounts <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">new</sup>
                         </h3>
                         <ul class="">
-                            <a href="{{ url('/discounted') }}" class="nav-link">
+                            <a href="{{ url('/discounted') }}" class="nav-link active">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
                             </a>
                             <a href="{{ url('/staffs') }}" class="nav-link">
@@ -145,7 +145,7 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
             <div class="container-fluid">
-                <h1 class="page-title-h1">Product Categories</h1>
+                <h1 class="page-title-h1">Discounted Customer Types</h1>
 
                 <div class="main-box">
                     <div class="table-heading">
@@ -158,16 +158,20 @@
                             @endforeach
                         @endif
 
-                        @if (session('newProducrCategory'))
-                            <p class="alert alert-success">{{ session('newProducrCategory') }}</p>
+                        @if (session('discountAddedSuccessfully'))
+                            <p class="alert alert-success">{{ session('discountAddedSuccessfully') }}</p>
                         @endif
-                        @if (session('edditedProductCategory'))
-                            <p class="alert alert-success">{{ session('edditedProductCategory') }}</p>
+                        @if (session('discountUpdatedSuccessfully'))
+                            <p class="alert alert-success">{{ session('discountUpdatedSuccessfully') }}</p>
                         @endif
-                        @if (session('deletedProductCategory'))
-                            <p class="alert alert-success">{{ session('deletedProductCategory') }}</p>
+                        @if (session('discountRemoved'))
+                            <p class="alert alert-success">{{ session('discountRemoved') }}</p>
                         @endif
-                        
+
+                        @if (session('discountAlreadyAdded'))
+                            <p class="alert alert-info">{{ session('discountAlreadyAdded') }}</p>
+                        @endif
+
                         {{-- end messages --}}
 
                         <div class="row">
@@ -181,7 +185,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">
                                 <button class="btn btn-white">
-                                    Export 
+                                    Export
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <g clip-path="url(#clip0_79_372)">
                                         <path d="M19.3554 2.30768H12.3077V4.60306H14.6392V6.16537H12.3077V7.69229H14.6154V9.23076H12.3077V10.7692H14.6154V12.3077H12.3077V13.8461H14.6154V15.3846H12.3077V17.6923H19.3554C19.71 17.6923 20 17.3915 20 17.0231V2.97691C20 2.60845 19.71 2.30768 19.3554 2.30768ZM18.4615 15.3846H15.3846V13.8461H18.4615V15.3846ZM18.4615 12.3077H15.3846V10.7692H18.4615V12.3077ZM18.4615 9.23076H15.3846V7.69229H18.4615V9.23076ZM18.4615 6.15383H15.3846V4.61537H18.4615V6.15383Z" fill="#030104"/>
@@ -194,33 +198,33 @@
                                         </defs>
                                     </svg>
                                 </button>
-                                <button class="btn btn-primary new-btn" data-toggle="modal" data-target="#productcategory">New Product Category</button>
+                                <button class="btn btn-primary new-btn" data-toggle="modal" data-target="#discount">Add Discount</button>
 
-                                {{-- product category modal --}}
+                                {{-- discount modal --}}
 
-                                <div class="modal fade" id="productcategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="discount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add New Product Category</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Select customer type to add discount</h5>
                                             <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ url('/addproductcategory') }}" method="post">
+                                            <form action="{{ url('/adddiscount') }}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="">Category Name</label>
-                                                    <input type="text" name="categoryName" placeholder="Category Name..." class="form-control">
+                                                    <label for="">Customer Types</label>
+                                                    <select name="customerTypeId" id="" class="form-control">
+                                                        @foreach ($customerTypes as $customerType)
+                                                            <option value="{{ $customerType->id }}">{{ $customerType->customersType }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="">Category Description</label>
-                                                    <textarea name="categoryDescription" class="form-control" cols="30" rows="10"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">Packaging</label>
-                                                    <input type="text" name="categoryPackaging" placeholder="wholesale..." class="form-control">
+                                                    <label for="">Discount Percentage</label>
+                                                    <input type="number" name="discount" class="form-control" placeholder="Discount">
                                                 </div>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-success form-control">Save <i class="fa fa-check"></i></button>
@@ -234,12 +238,11 @@
                                     </div>
                                 </div>
 
-                                {{-- end product category --}}
-
+                                {{-- end discount modal --}}
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -247,101 +250,90 @@
                                   <th scope="col">
                                     <input type="checkbox" name="" id="">
                                   </th>
-                                  <th scope="col">Category Name</th>
-                                  <th scope="col">Category Description</th>
-                                  <th scope="col">Category Packaging</th>
+                                  <th scope="col">Customer Type</th>
+                                  <th scope="col">Discounted (%)</th>
                               </thead>
                               <tbody>
-                                @foreach ($productCategories as $productCategory)
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" name="" id="">
-                                        </th>
-                                        <td>{{ $productCategory->categoryName }}</td>
-                                        <td>{{ $productCategory->categoryDescription }}</td>
-                                        <td>{{ $productCategory->categoryPackaging }}</td>
-                                        <td>
-                                            <!-- Example single danger button -->
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Action
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editProductCategory{{ $productCategory->id }}">Edit</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete{{ $productCategory->id }}">Remove</a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                @foreach ($customerTypes as $customerType)
+                                    @if ($customerType->isDiscounted)
+                                        <tr>
+                                            <th scope="col">
+                                                <input type="checkbox" name="" id="">
+                                            </th>
+                                            <td>{{ $customerType->customersType }}</td>
+                                            <td><b class="text-success">{{ $customerType->discountPercentage }}%</b></td>
+                                            <td>
+                                                <i class="fa fa-edit text-primary" data-toggle="modal" data-target="#editDiscount{{ $customerType->id }}"></i>
 
-                                    {{-- edit product category modal --}}
+                                                {{-- discount modal --}}
 
-                                    <div class="modal fade" id="editProductCategory{{ $productCategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit {{ $productCategory->categoryName }}</h5>
-                                                <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ url('/saveproductcategory', ['id' => $productCategory->id]) }}" method="post">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <label for="">Category Name</label>
-                                                        <input type="text" name="categoryName" placeholder="Category Name..." class="form-control" value="{{ $productCategory->categoryName }}">
+                                                <div class="modal fade" id="editDiscount{{ $customerType->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit discount for {{ $customerType->customersType }}</h5>
+                                                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ url('/saveeditdiscount/'.$customerType->id) }}" method="POST">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label for="">Discount Percentage</label>
+                                                                    <input type="number" name="discount" class="form-control" placeholder="Discount" value="{{ $customerType->discountPercentage }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn btn-success form-control">Save <i class="fa fa-check"></i></button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="">Category Description</label>
-                                                        <textarea name="categoryDescription" class="form-control" cols="30" rows="10">{{ $productCategory->categoryDescription }}</textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="">Packaging</label>
-                                                        <input type="text" name="categoryPackaging" placeholder="wholesale..." class="form-control" value="{{ $productCategory->categoryPackaging }}">
+                                                </div>
+
+                                                {{-- end discount modal --}}
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-trash text-danger" data-toggle="modal" data-target="#deleteDiscount{{ $customerType->id }}"></i>
+
+                                                {{-- discount modal --}}
+
+                                                <div class="modal fade" id="deleteDiscount{{ $customerType->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Remove discount for {{ $customerType->customersType }}?</h5>
+                                                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>
+                                                                Do you want to remove <b>{{ $customerType->discountPercentage }}%</b> discount for <b>{{ $customerType->customersType }}</b>? This action cannot be undone.
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="{{ url('/removediscount', ['id' => $customerType->id ]) }}">
+                                                                <button type="button" class="btn btn-success"><i class="fa fa-check"></i> Yes</button>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-success form-control">Save <i class="fa fa-check"></i></button>
                                                     </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
+                                                </div>
 
-                                    {{-- end product category modal --}}
-
-                                    {{------------------------------------- delete modal -------------------------------------------------}}
-
-                                    <div class="modal fade" id="delete{{ $productCategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h5 class="modal-title" id="exampleModalLabel">Remove <b>{{ $productCategory->categoryName }}</b></h5>
-                                            </div>
-                                            <div class="modal-body">
-                                              <p>
-                                                Do you want to remove <b>{{ $productCategory->categoryName }}</b>? This action cannot be undone.
-                                              </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="{{ url('/deleteproductcategory', ['id' => $productCategory->id ]) }}">
-                                                    <button type="button" class="btn btn-danger"><i class="fa fa-check"></i> Yes</button>
-                                                </a>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                    {{------------------------------------------------ end delete modal -------------------------------------------}}
-
+                                                {{-- end discount modal --}}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                               </tbody>
                         </table>
-                        {{ $productCategories->links('pagination::bootstrap-5') }}
+                        {{-- {{ $customers->links('pagination::bootstrap-5') }} --}}
                     </div>
                 </div>
             </div>

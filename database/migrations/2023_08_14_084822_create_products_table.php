@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('productDescription');
             $table->string('productPrice');
             $table->integer('productQuantity');
+            $table->string('productUnit');
             $table->string('productStatus');
             $table->string('productCost');
             $table->timestamps();

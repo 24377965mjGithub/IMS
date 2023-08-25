@@ -13,5 +13,7 @@ class CustomerType extends Model implements Auditable
 
     protected $fillable = [
         'customersType',
+        'isDiscounted',
+        'discountPercentage'
     ];
 }

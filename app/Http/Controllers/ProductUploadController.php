@@ -20,6 +20,7 @@ class ProductUploadController extends Controller
             'productDescription'=> 'max:225',
             'productPrice' => 'required',
             'productQuantity' => 'required',
+            'productUnit' => 'required',
             'productCost' => 'required'
         ]);
 
@@ -32,7 +33,7 @@ class ProductUploadController extends Controller
 
         if($req->file()) {
 
-            $fileName = time() . '.'. $req->productImage->extension();  
+            $fileName = sha1('productBarCode'.time()) . '.'. $req->productImage->extension();
 
             $type = $req->productImage->getClientMimeType();
             $size = $req->productImage->getSize();
@@ -46,6 +47,7 @@ class ProductUploadController extends Controller
                 'productDescription' => $req->productDescription,
                 'productPrice' => $req->productPrice,
                 'productQuantity' => $req->productQuantity,
+                'productUnit' => $req->productUnit,
                 'productStatus' => 'available',
                 'productCost'  => $req->productCost
             ])) {

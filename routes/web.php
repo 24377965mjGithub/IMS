@@ -42,6 +42,7 @@ use App\Http\Controllers\SaveStaffEmailController;
 use App\Http\Controllers\SaveStaffPhoneNumberController;
 use App\Http\Controllers\SaveStaffPasswordController;
 use App\Http\Controllers\TerminateStaffController;
+use App\Http\Controllers\FilterDates;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +94,7 @@ Route::get('/productfailures', [ProductFailureController::class, 'productFailure
 Route::get('/staffroles', [StaffRoleController::class, 'staffRole'])->middleware(['auth', 'verified']);
 Route::get('/staffs', [StaffController::class, 'staff'])->middleware(['auth', 'verified']);
 Route::get('/discounted', [DiscountedController::class, 'discounted'])->middleware(['auth', 'verified']);
+Route::get('/filter-sales', [FilterDates::class, 'filterDateSales'])->middleware(['auth', 'verified']);
 
 Route::get('/deletesupplier/{id}', [DeleteSupplier::class, 'deleteSupplier'])->middleware(['auth', 'verified']);
 Route::get('/deleteproductcategory/{id}', [DeleteProductCategory::class, 'deleteProductCategory'])->middleware(['auth', 'verified']);

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\EditSuppliersController;
 use App\Http\Controllers\Api\GetSalesController;
 use App\Http\Controllers\Api\CreateCategoryInProductAddController;
 use App\Http\Controllers\Api\CreateSupplierInProductAddController;
+use App\Http\Controllers\Api\FilterDates;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware('auth:sanctum')->get('/getsuppliers',[GetSuppliersController::
 Route::middleware('auth:sanctum')->get('/getsales',[GetSalesController::class, 'getSales']);
 Route::middleware('auth:sanctum')->get('/loadproductcategories',[CreateCategoryInProductAddController::class, 'loadCategories']);
 Route::middleware('auth:sanctum')->get('/loadproductsuppliers',[CreateSupplierInProductAddController::class, 'loadSuppliers']);
+Route::middleware('auth:sanctum')->post('/filter-sales',[FilterDates::class, 'filterDateSales']);
+Route::middleware('auth:sanctum')->post('/filter-expense',[FilterDates::class, 'filterDateExpenses']);
 
 // put
 

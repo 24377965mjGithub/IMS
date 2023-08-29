@@ -27,21 +27,38 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $sales = ProductOuts::all();
-        $saleMonths = [];
-        foreach ($sales as $key => $value) {
-            $month = Carbon::createFromFormat('Y-m-d H:i:s', $value['created_at'])->format('M Y');
-            if (!in_array($month, $saleMonths)) {
-                array_push($saleMonths, $month);
-            }
-        };
+            $saleMonths = [];
+            foreach ($sales as $key => $value) {
+                // $month = Carbon::createFromFormat('Y-m-d H:i:s', $value['created_at'])->format('M d Y');
+                $saleDates = [
+                    'date' => $value['created_at'],
+                    'formatted_created_at' => Carbon::createFromFormat('Y-m-d H:i:s', $value['created_at'])->format('M d Y')
+                ];
+
+                // foreach ($saleMonths as $key2 => $value2) {
+                //     if (!in_array($saleDates['date'], $saleMonths)) {
+                //         array_push($saleMonths, $saleDates);
+                //     }
+                // }
+
+                if (!in_array($saleDates['date'], $saleMonths)) {
+                    array_push($saleMonths, $saleDates);
+                }
+                // $month = Carbon::createFromFormat('Y-m-d H:i:s', $value['created_at'])->format('M d Y');
+
+            };
+
+            // return $saleMonths;
+            $audits = DB::table('audits')->orderBy('id', 'desc')->get();
+            $qoute = Inspiring::quote();
+            return view('dashboard', [
+                'audits'  => $audits, 'qoute' => $qoute,
+                'saleMonths' => $saleMonths
+            ]);
+
 
         // return $saleMonths;
-        $audits = DB::table('audits')->orderBy('id', 'desc')->get();
-        $qoute = Inspiring::quote();
-        return view('dashboard', [
-            'audits'  => $audits, 'qoute' => $qoute,
-            'saleMonths' => $saleMonths
-        ]);
     }
 }

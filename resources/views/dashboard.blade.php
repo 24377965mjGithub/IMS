@@ -161,29 +161,48 @@
                                     <div class="mb-3 mb-sm-0">
                                         <h5 class="card-title fw-semibold">Sales Overview</h5>
                                     </div>
-                                    <div>
-                                        <select class="form-select saleMonth">
-                                            @foreach ($saleMonths as $saleMonth)
-                                                <option value="1">{{ $saleMonth }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">From</label>
+                                                <input type="date" name="" class="saleMonthFrom form-control" id="">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">To</label>
+                                                <input type="date" name="" class="saleMonthTo form-control" id="">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">Filter Sales</label>
+                                                <button class="btn btn-info form-control filter"><i class="fa fa-filter"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div id="chart1"></div><div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                                <div id="chart1"></div>
+                                <div id="filterSales"></div>
+                                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                                     <div class="mb-3 mb-sm-0">
                                         <h5 class="card-title fw-semibold">Expenses Overview</h5>
                                     </div>
-                                    <div>
-                                        <select class="form-select">
-
-                                            <option value="1">March 2023</option>
-                                            <option value="2">April 2023</option>
-                                            <option value="3">May 2023</option>
-                                            <option value="4">June 2023</option>
-                                        </select>
-                                    </div>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">From</label>
+                                                <input type="date" name="" class="expenseMonthFrom form-control" id="">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">To</label>
+                                                <input type="date" name="" class="expenseMonthTo form-control" id="">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label for="">Filter Expenses</label>
+                                                <button class="btn btn-primary form-control expenseFilter"><i class="fa fa-filter"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div id="chart2"></div>
+                                <div id="filterExpense"></div>
                             </div>
                         </div>
                     </div>

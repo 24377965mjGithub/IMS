@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('productImage');
             $table->integer('productCategoryId');
             $table->integer('suppliersId');
-            $table->string('productBarCode');
+            $table->string('productBarCode')->nullable();
             $table->string('productName');
-            $table->text('productDescription');
+            $table->text('productDescription')->nullable();
             $table->string('productPrice');
             $table->integer('productQuantity');
             $table->string('productUnit');

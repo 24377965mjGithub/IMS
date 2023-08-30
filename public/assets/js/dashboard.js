@@ -88,6 +88,10 @@ $(document).ready(function () {
                 });
             });
 
+            let total = saleHolder.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            // total sales
+            $('.totalSales').html('Total: ₱' + total.toLocaleString());
+
             var chart = {
             series: [
                 { name: "Earnings this day", data: saleHolder },
@@ -95,10 +99,10 @@ $(document).ready(function () {
 
             chart: {
                 type: "bar",
-                height: 345,
+                height: 300,
                 offsetX: -15,
                 toolbar: { show: true },
-                foreColor: "#adb0bb",
+                foreColor: "#313DAA",
                 fontFamily: 'inherit',
                 sparkline: { enabled: false },
             },
@@ -197,8 +201,6 @@ $(document).ready(function () {
 
   $.get('api/getsales', function (res) {
 
-    console.log(res);
-
     let globalDateHolder = [];
 
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -276,6 +278,10 @@ $(document).ready(function () {
       });
     });
 
+    let total = saleHolder.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    // total sales
+    $('.totalSales').html('Total: ₱' + total.toLocaleString());
+
     var chart = {
       series: [
         { name: "Earnings this day", data: saleHolder },
@@ -283,10 +289,10 @@ $(document).ready(function () {
 
       chart: {
         type: "bar",
-        height: 345,
+        height: 300,
         offsetX: -15,
         toolbar: { show: true },
-        foreColor: "#adb0bb",
+        foreColor: "#313DAA",
         fontFamily: 'inherit',
         sparkline: { enabled: false },
       },
@@ -462,20 +468,24 @@ $(document).ready(function () {
             });
         });
 
+        let total = deliveryHolder.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            // total expenses
+        $('.totalExpenses').html('Total: ₱' + total.toLocaleString());
+
         var chart = {
         series: [
             // { name: "Earnings this month:", data: [50, 390, 300, 350, 390, 180, 355, 390] },
-            // { name: "Expense this month:", data: [20, 250, 325, 215, 250, 310, 280, 250] },
+            // { name: "Expense this month:", data: [20, 300, 325, 215, 300, 310, 280, 300] },
             // { name: "Earnings this day:", data: saleHolder },
             { name: "Expenses this day:", data: deliveryHolder },
         ],
 
         chart: {
             type: "bar",
-            height: 345,
+            height: 300,
             offsetX: -15,
             toolbar: { show: true },
-            foreColor: "#adb0bb",
+            foreColor: "#b30000",
             fontFamily: 'inherit',
             sparkline: { enabled: false },
         },
@@ -631,20 +641,24 @@ $(document).ready(function () {
       });
     });
 
+    let total = deliveryHolder.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            // total expenses
+        $('.totalExpenses').html('Total: ₱' + total.toLocaleString());
+
     var chart = {
       series: [
         // { name: "Earnings this month:", data: [50, 390, 300, 350, 390, 180, 355, 390] },
-        // { name: "Expense this month:", data: [20, 250, 325, 215, 250, 310, 280, 250] },
+        // { name: "Expense this month:", data: [20, 300, 325, 215, 300, 310, 280, 300] },
         // { name: "Earnings this day:", data: saleHolder },
         { name: "Expenses this day:", data: deliveryHolder },
       ],
 
       chart: {
         type: "bar",
-        height: 345,
+        height: 300,
         offsetX: -15,
         toolbar: { show: true },
-        foreColor: "#adb0bb",
+        foreColor: "#b30000",
         fontFamily: 'inherit',
         sparkline: { enabled: false },
       },
@@ -751,106 +765,326 @@ $(document).ready(function () {
 
 
   // =====================================
-  // Breakup
+  // monthly earnings
   // =====================================
-  var breakup = {
-    color: "#adb5bd",
-    series: [38, 40, 25],
-    labels: ["2022", "2021", "2020"],
-    chart: {
-      width: 180,
-      type: "donut",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    plotOptions: {
-      pie: {
-        startAngle: 0,
-        endAngle: 360,
-        donut: {
-          size: '75%',
+
+  $.get('api/getsales', function (res) {
+    let globalDateHolder = [];
+
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let dateNow = new Date();
+    let dateNowString = dateNow.toLocaleDateString("en-US", options);
+    Array.prototype.max = function() {
+      return Math.max.apply(null, this);
+    };
+
+    Array.prototype.min = function() {
+      return Math.min.apply(null, this);
+    };
+    // query product outs ====================================================================================================
+
+    let sales = [];
+
+    res.productOuts.forEach(element => {
+
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      let date_s  = new Date(element.created_at);
+      let dateNow = new Date();
+
+      let salesDate = date_s.toLocaleDateString("en-US", options);
+
+      // query products
+
+      res.products.forEach(element2 => {
+        res.customerTypes.forEach(discount => {
+          if(element.customersTypeId == discount.id) {
+            if (element.productId === element2.id) {
+              if (!discount.discountPercentage) {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': Math.round((element.quantity * element2.productPrice + Number.EPSILON) * 100) / 100,
+                  'date': salesDate
+                });
+              } else {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': (element.quantity * element2.productPrice - element.quantity * element2.productPrice * parseFloat("0."+discount.discountPercentage)).toFixed(1),
+                  'date': salesDate
+                });
+              }
+            }
+          }
+        });
+
+      });
+    });
+
+    // end query product outs ==============================================================================================
+
+    let salesPerMonth = Object.values(sales.reduce((r, o) => {
+      r[o.date] = r[o.date] || {Date: o.date, Sales : 0};
+      r[o.date].Sales += +o.sale;
+      return r;
+    },{}));
+
+    // dates in sales
+    salesPerMonth.forEach(element => {
+      globalDateHolder.push(element.Date);
+    });
+
+    let saleHolder = [];
+    let maxValue = [];
+
+    globalDateHolder.forEach(dates => {
+      salesPerMonth.forEach(sales => {
+
+        maxValue.push(sales.Sales);
+
+        if (dates === sales.Date) {
+          saleHolder.push(sales.Sales);
+        }
+      });
+    });
+
+    $('.searchMonthlyEarnings').click(function () {
+        let monthlyEarnings = new Date($('.monthlyEarnings').val()).toLocaleDateString("en-US", options)
+        let monthAndYear = monthlyEarnings.split(' ')[1] + " " + monthlyEarnings.split(' ')[3];
+
+        let salesComputerArrayPerMonth = [];
+
+        salesPerMonth.forEach(sale => {
+            let splitMonthInSale = sale.Date.split(' ');
+            if (splitMonthInSale[1] === monthlyEarnings.split(' ')[1] && splitMonthInSale[3] === monthlyEarnings.split(' ')[3]) {
+                salesComputerArrayPerMonth.push(sale.Sales);
+            }
+        });
+
+        let total = salesComputerArrayPerMonth.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        $('.monthlyEarning').html("");
+        $('.monthYear').html("");
+
+        $('.monthlyEarning').append("₱" + total.toLocaleString());
+        $('.monthYear').html(monthAndYear);
+
+        console.log(total);
+
+    });
+
+    var monthlyEarning = {
+        color: "#adb5bd",
+        series: [38, 40, 25],
+        labels: ["2022", "2021", "2020"],
+        chart: {
+          width: 180,
+          type: "donut",
+          fontFamily: "Plus Jakarta Sans', sans-serif",
+          foreColor: "#adb0bb",
         },
-      },
-    },
-    stroke: {
-      show: false,
-    },
-
-    dataLabels: {
-      enabled: false,
-    },
-
-    legend: {
-      show: false,
-    },
-    colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
-
-    responsive: [
-      {
-        breakpoint: 991,
-        options: {
-          chart: {
-            width: 150,
+        plotOptions: {
+          pie: {
+            startAngle: 0,
+            endAngle: 360,
+            donut: {
+              size: '75%',
+            },
           },
         },
-      },
-    ],
-    tooltip: {
-      theme: "dark",
-      fillSeriesColor: false,
-    },
-  };
+        stroke: {
+          show: false,
+        },
 
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-  chart.render();
+        dataLabels: {
+          enabled: false,
+        },
+
+        legend: {
+          show: false,
+        },
+        colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
+
+        responsive: [
+          {
+            breakpoint: 991,
+            options: {
+              chart: {
+                width: 150,
+              },
+            },
+          },
+        ],
+        tooltip: {
+          theme: "dark",
+          fillSeriesColor: false,
+        },
+      };
+
+      var chart = new ApexCharts(document.querySelector("#monthlyEarning"), monthlyEarning);
+      chart.render();
+  });
 
 
 
   // =====================================
   // Earning
   // =====================================
-  var earning = {
-    chart: {
-      id: "sparkline3",
-      type: "area",
-      height: 60,
-      sparkline: {
-        enabled: true,
-      },
-      group: "sparklines",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    series: [
-      {
-        name: "Earnings",
-        color: "#49BEFF",
-        data: [25, 66, 20, 40, 12, 58, 20],
-      },
-    ],
-    stroke: {
-      curve: "smooth",
-      width: 2,
-    },
-    fill: {
-      colors: ["#f3feff"],
-      type: "solid",
-      opacity: 0.05,
-    },
 
-    markers: {
-      size: 0,
-    },
-    tooltip: {
-      theme: "dark",
-      fixed: {
-        enabled: true,
-        position: "right",
-      },
-      x: {
-        show: false,
-      },
-    },
-  };
-  new ApexCharts(document.querySelector("#earning"), earning).render();
+  $.get('api/getsales', function (res) {
+
+    let globalDateHolder = [];
+
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let dateNow = new Date();
+    let dateNowString = dateNow.toLocaleDateString("en-US", options);
+    Array.prototype.max = function() {
+      return Math.max.apply(null, this);
+    };
+
+    Array.prototype.min = function() {
+      return Math.min.apply(null, this);
+    };
+    // query product outs ====================================================================================================
+
+    let sales = [];
+
+    res.productOuts.forEach(element => {
+
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      let date_s  = new Date(element.created_at);
+      let dateNow = new Date();
+
+      let salesDate = date_s.toLocaleDateString("en-US", options);
+
+      // query products
+
+      res.products.forEach(element2 => {
+        res.customerTypes.forEach(discount => {
+          if(element.customersTypeId == discount.id) {
+            if (element.productId === element2.id) {
+              if (!discount.discountPercentage) {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': Math.round((element.quantity * element2.productPrice + Number.EPSILON) * 100) / 100,
+                  'date': salesDate
+                });
+              } else {
+                sales.push({
+                  'item': element2.productName,
+                  'sale': (element.quantity * element2.productPrice - element.quantity * element2.productPrice * parseFloat("0."+discount.discountPercentage)).toFixed(1),
+                  'date': salesDate
+                });
+              }
+            }
+          }
+        });
+
+      });
+    });
+
+    // end query product outs ==============================================================================================
+
+    let salesPerMonth = Object.values(sales.reduce((r, o) => {
+      r[o.date] = r[o.date] || {Date: o.date, Sales : 0};
+      r[o.date].Sales += +o.sale;
+      return r;
+    },{}));
+
+    // dates in sales
+    salesPerMonth.forEach(element => {
+      globalDateHolder.push(element.Date);
+    });
+
+    let saleHolder = [];
+    let maxValue = [];
+
+    globalDateHolder.forEach(dates => {
+      salesPerMonth.forEach(sales => {
+
+        maxValue.push(sales.Sales);
+
+        if (dates === sales.Date) {
+          saleHolder.push(sales.Sales);
+        }
+      });
+    });
+
+    let lastEarning = saleHolder[saleHolder.length - 1];
+
+    // sale now
+    $('.saleNow').append(lastEarning.toLocaleString());
+    $('.currentDateEarning').append(salesPerMonth[salesPerMonth.length - 1].Date)
+
+    console.log(salesPerMonth)
+
+    $('.searchDailyEarnings').click(function () {
+        let dailyEarningDate = new Date($('.dailyEarningDate').val()).toLocaleDateString("en-US", options)
+        let targetIndexDailyEarnings = salesPerMonth.findIndex(date => date.Date == dailyEarningDate);
+
+        if (targetIndexDailyEarnings != -1) {
+            $('.searchDailyEarningsError').hide();
+            $('.searchSaleDate').show();
+            $('.saleSearchDate').html("");
+            $('.saleSearchEarnings').html("");
+            $('.saleSearchDate').html(salesPerMonth[targetIndexDailyEarnings].Date);
+            $('.saleSearchEarnings').html("₱" + salesPerMonth[targetIndexDailyEarnings].Sales.toLocaleString());
+        } else {
+            $('.searchSaleDate').hide();
+            $('.searchDailyEarningsError').show();
+            $('.searchDailyEarningsError').html("No Earnings on "+ dailyEarningDate);
+        }
+
+    })
+
+    var earning = {
+        chart: {
+          id: "sparkline3",
+          type: "area",
+          height: 60,
+          sparkline: {
+            enabled: true,
+          },
+          group: "sparklines",
+          fontFamily: "Plus Jakarta Sans', sans-serif",
+          foreColor: "#adb0bb",
+        },
+        series: [
+          {
+            name: "Earnings",
+            color: "#49BEFF",
+            // data: [25, 66, 20, 40, 12, 58, 20],
+            data: saleHolder,
+          },
+        ],
+        stroke: {
+          curve: "smooth",
+          width: 2,
+        },
+        fill: {
+          colors: ["#f3feff"],
+          type: "solid",
+          opacity: 0.05,
+        },
+
+        markers: {
+          size: 0,
+        },
+        tooltip: {
+          theme: "dark",
+          fixed: {
+            enabled: true,
+            position: "right",
+          },
+          x: {
+            show: false,
+          },
+        },
+      };
+      new ApexCharts(document.querySelector("#earning"), earning).render();
+
+  });
+
+
+
+
+
 })

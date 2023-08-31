@@ -135,9 +135,9 @@
                             <a href="{{ url('/discounted') }}" class="nav-link active">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
                             </a>
-                            <a href="{{ url('/staffs') }}" class="nav-link">
+                            {{-- <a href="{{ url('/staffs') }}" class="nav-link">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Vouchers <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">23</sup></h5></li>
-                            </a>
+                            </a> --}}
                         </ul>
                     </li>
                 @endif

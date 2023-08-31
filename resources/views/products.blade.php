@@ -135,9 +135,9 @@
                             <a href="{{ url('/discounted') }}" class="nav-link">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
                             </a>
-                            <a href="{{ url('/staffs') }}" class="nav-link">
+                            {{-- <a href="{{ url('/staffs') }}" class="nav-link">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Vouchers <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">23</sup></h5></li>
-                            </a>
+                            </a> --}}
                         </ul>
                     </li>
                 @endif
@@ -197,7 +197,7 @@
                         {{-- end messages --}}
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 search-box">
+                            <div class="col-lg-4 col-md-4 col-sm-12 search-box">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><p><i class="fa fa-search"></i></p></span>
@@ -208,8 +208,29 @@
                                         </div>
                                     </form>
                                 </div>
+
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 buttons">
+                            <div class="col-lg-4 col-md-4 col-sm-12 search-box">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter by category
+                                    </button>
+                                    {{-- <i class="fa fa-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Category one</a>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter by supplier
+                                    </button>
+                                    {{-- <i class="fa fa-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Category one</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 buttons">
                                 <button class="btn btn-white">
                                     Export
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

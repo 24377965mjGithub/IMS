@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    
+
     {{-- font awesome --}}
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css') }}"/>
@@ -36,10 +36,10 @@
     <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/jquery.zmd.hierarchical-display.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/MDB-Free_4.20.0/css/addons/rating.min.css') }}">
 
-    
+
 
     {{-- theme styles --}}
-    
+
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <style>
         @font-face {
@@ -51,7 +51,7 @@
         font-family: PoppinsRegular;
         src: url('assets/fonts/Poppins-Regular.woff2') format('woff2');
         }
-        
+
         #loader {
             border: 12px solid #f3f3f3;
             border-radius: 50%;
@@ -60,7 +60,7 @@
             height: 70px;
             animation: spin 1s linear infinite;
         }
- 
+
         .center {
             position: absolute;
             top: 0;
@@ -69,7 +69,7 @@
             right: 0;
             margin: auto;
         }
- 
+
         @keyframes spin {
             100% {
                 transform: rotate(360deg);
@@ -92,7 +92,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/welcome/css/style.css') }}">
 	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script> --}}
-    
+
     {{-- custom --}}
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
@@ -135,7 +135,7 @@
 
                             <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
-                            
+
                                 {{-- hidden --}}
 
                             <li class="nav-item hidden-menus">

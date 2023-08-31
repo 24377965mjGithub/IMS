@@ -99,7 +99,7 @@ $(document).ready(function () {
 
             chart: {
                 type: "bar",
-                height: 300,
+                height: 350,
                 offsetX: -15,
                 toolbar: { show: true },
                 foreColor: "#313DAA",
@@ -289,7 +289,7 @@ $(document).ready(function () {
 
       chart: {
         type: "bar",
-        height: 300,
+        height: 350,
         offsetX: -15,
         toolbar: { show: true },
         foreColor: "#313DAA",
@@ -482,7 +482,7 @@ $(document).ready(function () {
 
         chart: {
             type: "bar",
-            height: 300,
+            height: 350,
             offsetX: -15,
             toolbar: { show: true },
             foreColor: "#b30000",
@@ -655,7 +655,7 @@ $(document).ready(function () {
 
       chart: {
         type: "bar",
-        height: 300,
+        height: 350,
         offsetX: -15,
         toolbar: { show: true },
         foreColor: "#b30000",
@@ -871,13 +871,32 @@ $(document).ready(function () {
 
     });
 
+    console.log(salesPerMonth);
+
+    let pastYear = "";
+    let yearSaleComputer = []
+
+    salesPerMonth.forEach(sale => {
+        let splitYearInSale = sale.Date.split(' ');
+
+        if(pastYear === splitYearInSale[3]) {
+            yearSaleComputer.push(splitYearInSale[3]);
+            console.log('Same year ' + splitYearInSale[3]);
+        } else {
+            yearSaleComputer.push(splitYearInSale[3]);
+            console.log('Not same year ' + splitYearInSale[3]);
+        }
+
+        console.log(yearSaleComputer);
+    });
+
     var monthlyEarning = {
         color: "#adb5bd",
         series: [38, 40, 25],
         labels: ["2022", "2021", "2020"],
         chart: {
           width: 180,
-          type: "donut",
+          type: "pie",
           fontFamily: "Plus Jakarta Sans', sans-serif",
           foreColor: "#adb0bb",
         },
@@ -901,7 +920,7 @@ $(document).ready(function () {
         legend: {
           show: false,
         },
-        colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
+        colors: ["#5D87FF", "#ecf2ff", "#dc3545"],
 
         responsive: [
           {

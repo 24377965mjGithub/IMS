@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 class SuppliersController extends Controller
 {
     public function suppliers() {
-        $suppliers = Suppliers::orderBy('id', 'desc')->paginate(5);
+        $suppliers = Suppliers::orderBy('id', 'desc')->paginate(10);
         return view('suppliers', ['suppliers' => $suppliers]);
     }
 }

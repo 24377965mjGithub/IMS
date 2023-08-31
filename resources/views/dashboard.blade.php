@@ -135,9 +135,9 @@
                             <a href="{{ url('/discounted') }}" class="nav-link">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
                             </a>
-                            <a href="{{ url('/staffs') }}" class="nav-link">
+                            {{-- <a href="{{ url('/staffs') }}" class="nav-link">
                                 <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Vouchers <sup class="badge rounded-pill text-bg-danger" style="font-size: 10px">23</sup></h5></li>
-                            </a>
+                            </a> --}}
                         </ul>
                     </li>
                 @endif
@@ -223,54 +223,54 @@
 
                                 <div class="card overflow-hidden">
                                     <div class="card-body p-4">
-                                    <h5 class="card-title mb-9 fw-semibold">Monthly Earnings</h5>
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
+                                        <h5 class="card-title mb-9 fw-semibold">Monthly Earnings</h5>
+                                        <div class="row align-items-center">
+                                            <div class="col-8">
 
-                                            <div class="row py-3">
-                                                <div class="col-10">
-                                                    <div class="form-group">
-                                                        <label for="">Select month and year</label>
-                                                        <input type="month" name="" id="" class="form-control monthlyEarnings">
+                                                <div class="row py-3">
+                                                    <div class="col-10">
+                                                        <div class="form-group">
+                                                            <label for="">Select month and year</label>
+                                                            <input type="month" name="" id="" class="form-control monthlyEarnings">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2"><div class="form-group">
+                                                        <label for="">Search</label>
+                                                        <button class="btn btn-danger searchMonthlyEarnings"><i class="fa fa-search"></i></button>
+                                                    </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-2"><div class="form-group">
-                                                    <label for="">Search</label>
-                                                    <button class="btn btn-danger searchMonthlyEarnings"><i class="fa fa-search"></i></button>
-                                                </div>
-                                                </div>
-                                            </div>
 
 
-                                        <h4 class="fw-semibold mb-3"><span class="monthYear">Result will show here</span> - <span class="monthlyEarning text-success"></span></h5>
-                                        <div class="d-flex align-items-center mb-3">
-                                            {{-- <span
-                                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-                                            <i class="ti ti-arrow-up-left text-success"></i>
-                                            </span>
-                                            <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                                            <p class="fs-3 mb-0">last year</p> --}}
-                                            <p>
-                                                Monthly earnings is simply the amount earned every month before taxes and other deductions
-                                            </p>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-4">
-                                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                                            <span class="fs-2">2023</span>
+                                            <h4 class="fw-semibold mb-3"><span class="monthYear">Result will show here</span> - <span class="monthlyEarning text-success"></span></h5>
+                                            <div class="d-flex align-items-center mb-3">
+                                                {{-- <span
+                                                class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
+                                                <i class="ti ti-arrow-up-left text-success"></i>
+                                                </span>
+                                                <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                                                <p class="fs-3 mb-0">last year</p> --}}
+                                                <p>
+                                                    Monthly earnings is simply the amount earned every month before taxes and other deductions
+                                                </p>
                                             </div>
-                                            <div>
-                                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-                                            <span class="fs-2">2023</span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-4">
+                                                <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                                                <span class="fs-2">2023</span>
+                                                </div>
+                                                <div>
+                                                <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                                                <span class="fs-2">2023</span>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-4">
+                                            <div class="d-flex justify-content-center">
+                                                <div id="monthlyEarning"></div>
+                                            </div>
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="col-4">
-                                        <div class="d-flex justify-content-center">
-                                            <div id="monthlyEarning"></div>
-                                        </div>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +349,7 @@
                                                                 <span class="timeline-badge-border d-block flex-shrink-0"></span>
                                                             </div>
                                                         <div class="timeline-desc fs-3 text-dark mt-n1">
-                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} created a new {{ $audit->auditable_type }}  "{{ $audit->new_values }}"</p>
+                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} created a new {{ $audit->auditable_type }}</p>
                                                         </div>
                                                     </li>
                                                 @elseif ($audit->event === 'deleted')
@@ -371,7 +371,7 @@
                                                                 <span class="timeline-badge-border d-block flex-shrink-0"></span>
                                                             </div>
                                                         <div class="timeline-desc fs-3 text-dark mt-n1">
-                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} updated {{ $audit->auditable_type }} from "{{ $audit->old_values }}" to "{{ $audit->new_values }}"</p>
+                                                            <p style="font-size: 15px">{{ App\Models\User::where(['id' => $audit->user_id])->value('firstname') }} updated {{ $audit->auditable_type }}</p>
                                                         </div>
                                                     </li>
                                                 @endif

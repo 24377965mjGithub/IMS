@@ -23,6 +23,9 @@ class ProductsController extends Controller
                 if (($search = $request->search)) {
                     $query->orWhere('productName', 'LIKE', '%' . $search . '%')
                         ->orWhere('productBarCode', 'LIKE', '%' . $search . '%')
+                        ->orWhere('productDescription', 'LIKE', '%' . $search . '%')
+                        ->orWhere('productUnit', 'LIKE', '%' . $search . '%')
+                        ->orWhere('productStatus', 'LIKE', '%' . $search . '%')
                         ->get();
                 }
             }]

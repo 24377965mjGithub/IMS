@@ -147,8 +147,18 @@
             <div class="container-fluid">
                 @if (request()->get('search'))
                     <h1 class="page-title-h1">Products</h1>
-                    <p>
-                        <b>Showing results for "{{ request()->get('search') }}"</b>
+                    <p class="py-3">
+                        <b><a href="{{ url('/products') }}" style="color: blue; text-decoration: none;">Show all Products</a> | Showing results for "{{ request()->get('search') }}"</b>
+                    </p>
+                @elseif (request()->get('categorydesc'))
+                    <h1 class="page-title-h1">Products</h1>
+                    <p class="py-3">
+                        <b><a href="{{ url('/products') }}" style="color: blue; text-decoration: none;">Show all Products</a> | Filter by category "{{ request()->get('categorydesc') }}"</b>
+                    </p>
+                @elseif (request()->get('suppliername'))
+                    <h1 class="page-title-h1">Products</h1>
+                    <p class="py-3">
+                        <b><a href="{{ url('/products') }}" style="color: blue; text-decoration: none;">Show all Products</a> | Filter by supplier "{{ request()->get('suppliername') }}"</b>
                     </p>
                 @else
                     <h1 class="page-title-h1">Products</h1>
@@ -204,7 +214,7 @@
                                     </div>
                                     <form action="{{ url('/products') }}">
                                         <div class="form-group">
-                                            <input id="search" type="text" class="form-control" name="search" placeholder="Search product name" autocomplete="search" autofocus>
+                                            <input id="search" type="text" class="form-control" name="search" placeholder="Search product name, barcode, or unit or measurement..." autocomplete="search" autofocus>
                                         </div>
                                     </form>
                                 </div>
@@ -215,18 +225,20 @@
                                     <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Filter by category
                                     </button>
-                                    {{-- <i class="fa fa-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Category one</a>
+                                        @foreach ($productCategories as $productCategory)
+                                            <a class="dropdown-item" href="{{ url('/products?categoryfilter='.$productCategory->id.'&categorydesc='.$productCategory->categoryName) }}">{{ $productCategory->categoryName }}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Filter by supplier
                                     </button>
-                                    {{-- <i class="fa fa-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Category one</a>
+                                        @foreach ($suppliers as $supplier)
+                                            <a class="dropdown-item" href="{{ url('/products?suppliersfilter='.$supplier->id.'&suppliername='.$supplier->suppliersName) }}">{{ $supplier->suppliersName }}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

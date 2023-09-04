@@ -12,13 +12,22 @@ use App\Models\Role;
 
 class ProductFailureController extends Controller
 {
-    public function productFailure() {
+    public function productFailure(Request $request) {
         $productCategories = ProductCategory::all();
         $suppliers = Suppliers::all();
         $products = Products::all();
         $users = User::all();
         $roles = Role::all();
-        $productFailures = ProductFailure::orderBy('id', 'desc')->paginate(10);
+        // $productFailures = ProductFailure::orderBy('id', 'desc')->paginate(10);
+
+        $productFailures = ProductFailure::where([
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('created_at', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
 
         return view('productfailures',  [
             'productCategories' => $productCategories,

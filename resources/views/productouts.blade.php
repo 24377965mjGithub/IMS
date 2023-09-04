@@ -145,7 +145,20 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
             <div class="container-fluid">
-                <h1 class="page-title-h1">Product Outs</h1>
+                {{-- <h1 class="page-title-h1">Product Outs</h1> --}}
+
+                @if (request()->get('filterDate'))
+                    <h1 class="page-title-h1">Product Outs</h1>
+                    <p class="py-3">
+                        @if (request()->get('filterCustomer') != 'allcustomers')
+                            <b><a href="{{ url('/productouts') }}" style="color: blue; text-decoration: none;">Show all Product Outs</a> | Filter product outs on "{{ \Carbon\Carbon::parse(request()->get('filterDate'))->format('D M d, Y') }}" of {{ App\Models\Customers::where('id', request()->get('filterCustomer'))->value('customersName') }}.</b>
+                        @else
+                            <b><a href="{{ url('/productouts') }}" style="color: blue; text-decoration: none;">Show all Product Outs</a> | Filter product outs on "{{ \Carbon\Carbon::parse(request()->get('filterDate'))->format('D M d, Y') }}" of all customers.</b>
+                        @endif
+                    </p>
+                @else
+                    <h1 class="page-title-h1">Product Outs</h1>
+                @endif
 
                 <div class="main-box">
                     <div class="table-heading">
@@ -175,12 +188,40 @@
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 search-box">
-                                <div class="input-group mb-3">
+                                {{-- <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><p><i class="fa fa-search"></i></p></span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
+                                </div> --}}
+
+                                <form action="{{ url('/productouts') }}">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Filter By Date</label>
+                                                <input type="date" name="filterDate" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Select Customer</label>
+                                                <select name="filterCustomer" class="form-control" id="">
+                                                    <option value="allcustomers">All Customers</option>
+                                                    @foreach ($customers as $customer)
+                                                        <option value="{{ $customer->id }}">{{ $customer->customersName }} - {{ App\Models\CustomerType::where('id', $customer->customersType)->value('customersType') }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Search</label><br>
+                                                <button class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">
                                 <button class="btn btn-white">

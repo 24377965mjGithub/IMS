@@ -145,7 +145,14 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
             <div class="container-fluid">
-                <h1 class="page-title-h1">Staff Role</h1>
+                @if (request()->get('search'))
+                    <h1 class="page-title-h1">Staff Roles</h1>
+                    <p class="py-3">
+                        <b><a href="{{ url('/staffroles') }}" style="color: blue; text-decoration: none;">Show all Staff roles</a> | Showing results for "{{ request()->get('search') }}".</b>
+                    </p>
+                @else
+                    <h1 class="page-title-h1">Staff Roles</h1>
+                @endif
 
                 <div class="main-box">
                     <div class="table-heading">
@@ -176,7 +183,9 @@
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><p><i class="fa fa-search"></i></p></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
+                                    <form action="{{ url('/staffroles') }}">
+                                        <input type="text" class="form-control" placeholder="Search..." name="search" aria-label="Username" aria-describedby="basic-addon1">
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">

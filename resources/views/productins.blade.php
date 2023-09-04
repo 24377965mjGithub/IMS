@@ -145,7 +145,18 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
             <div class="container-fluid">
-                <h1 class="page-title-h1">Product Ins</h1>
+                @if (request()->get('filterDate'))
+                    <h1 class="page-title-h1">Products Ins</h1>
+                    <p class="py-3">
+                        @if (request()->get('filterSupplier') != 'allsuppliers')
+                            <b><a href="{{ url('/productins') }}" style="color: blue; text-decoration: none;">Show all Product Ins</a> | Filter product ins on "{{ \Carbon\Carbon::parse(request()->get('filterDate'))->format('D M d, Y') }}" from {{ App\Models\Suppliers::where('id', request()->get('filterSupplier'))->value('suppliersName') }}.</b>
+                        @else
+                            <b><a href="{{ url('/productins') }}" style="color: blue; text-decoration: none;">Show all Product Ins</a> | Filter product ins on "{{ \Carbon\Carbon::parse(request()->get('filterDate'))->format('D M d, Y') }}" from all suppliers.</b>
+                        @endif
+                    </p>
+                @else
+                    <h1 class="page-title-h1">Products Ins</h1>
+                @endif
 
                 <div class="main-box">
                     <div class="table-heading">
@@ -175,12 +186,39 @@
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 search-box">
-                                <div class="input-group mb-3">
+                                {{-- <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><p><i class="fa fa-search"></i></p></span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
+                                </div> --}}
+                                <form action="{{ url('/productins') }}">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Filter By Date</label>
+                                                <input type="date" name="filterDate" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Select Supplier</label>
+                                                <select name="filterSupplier" class="form-control" id="">
+                                                    <option value="allsuppliers">All Suppliers</option>
+                                                    @foreach ($suppliers as $supplier)
+                                                        <option value="{{ $supplier->id }}">{{ $supplier->suppliersName }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Search</label><br>
+                                                <button class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">
                                 <button class="btn btn">

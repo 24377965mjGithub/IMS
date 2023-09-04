@@ -145,19 +145,37 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 main">
             <div class="container-fluid">
-                <h1 class="page-title-h1">Product Failures (Damaged/Bad Orders)</h1>
+                @if (request()->get('search'))
+                    <h1 class="page-title-h1">Product Failures (Damaged/Bad Orders)</h1>
+                    <p class="py-3">
+                        <b><a href="{{ url('/productfailures') }}" style="color: blue; text-decoration: none;">Show all Product Ins</a> | Showing product failures on "{{ \Carbon\Carbon::parse(request()->get('search'))->format('D M d, Y') }}".</b>
+                    </p>
+                @else
+                    <h1 class="page-title-h1">Product Failures (Damaged/Bad Orders)</h1>
+                @endif
+                {{-- <h1 class="page-title-h1">Product Failures (Damaged/Bad Orders)</h1> --}}
 
                 <div class="main-box">
                     <div class="table-heading">
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 search-box">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><p><i class="fa fa-search"></i></p></span>
+                                <form action="{{ url('/productfailures') }}">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Select Date</label>
+                                                <input type="date" class="form-control" name="search" aria-label="Username" aria-describedby="basic-addon1">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Filter</label><br>
+                                                <button class="btn btn-outline-secondary"><i class="fa fa-filter"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
+                                </form>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">
                                 <button class="btn btn-white">

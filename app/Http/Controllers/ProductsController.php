@@ -28,6 +28,18 @@ class ProductsController extends Controller
                         ->orWhere('productStatus', 'LIKE', '%' . $search . '%')
                         ->get();
                 }
+            }],
+            [function ($query) use ($request) {
+                if (($categoryfilter = $request->categoryfilter)) {
+                    $query->orWhere('productCategoryId', $categoryfilter)
+                        ->get();
+                }
+            }],
+            [function ($query) use ($request) {
+                if (($suppliersfilter = $request->suppliersfilter)) {
+                    $query->orWhere('suppliersId', $suppliersfilter)
+                        ->get();
+                }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
 

@@ -288,7 +288,7 @@ $(document).ready(function () {
       ],
 
       chart: {
-        type: "bar",
+        type: 'bar',
         height: 350,
         offsetX: -15,
         toolbar: { show: true },

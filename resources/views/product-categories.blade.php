@@ -189,7 +189,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 buttons">
-                                <button class="btn btn-white">
+                                {{-- <button class="btn btn-white">
                                     Export
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <g clip-path="url(#clip0_79_372)">
@@ -202,7 +202,7 @@
                                         </clipPath>
                                         </defs>
                                     </svg>
-                                </button>
+                                </button> --}}
                                 <button class="btn btn-primary new-btn" data-toggle="modal" data-target="#productcategory">New Product Category</button>
 
                                 {{-- product category modal --}}

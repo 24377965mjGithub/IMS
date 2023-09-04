@@ -33,6 +33,7 @@ use App\Http\Controllers\SaveRoleController;
 use App\Http\Controllers\SaveEditRoleController;
 use App\Http\Controllers\DeleteRoleController;
 use App\Http\Controllers\DiscountedController;
+use App\Http\Controllers\ExportExcelController;
 use App\Http\Controllers\RemoveDiscountController;
 use App\Http\Controllers\SaveEditDiscountController;
 use App\Http\Controllers\StaffController;
@@ -95,6 +96,14 @@ Route::get('/staffroles', [StaffRoleController::class, 'staffRole'])->middleware
 Route::get('/staffs', [StaffController::class, 'staff'])->middleware(['auth', 'verified']);
 Route::get('/discounted', [DiscountedController::class, 'discounted'])->middleware(['auth', 'verified']);
 Route::get('/filter-sales', [FilterDates::class, 'filterDateSales'])->middleware(['auth', 'verified']);
+
+// exports
+
+Route::get('/export', [ExportExcelController::class, 'export'])->middleware(['auth', 'verified']);
+Route::get('/export-product-ins', [ExportExcelController::class, 'exportProductIns'])->middleware(['auth', 'verified']);
+Route::get('/export-product-outs', [ExportExcelController::class, 'exportProductOuts'])->middleware(['auth', 'verified']);
+Route::get('/export-product-failures', [ExportExcelController::class, 'exportFailure'])->middleware(['auth', 'verified']);
+Route::get('/export-suppliers', [ExportExcelController::class, 'exportSuppliers'])->middleware(['auth', 'verified']);
 
 Route::get('/deletesupplier/{id}', [DeleteSupplier::class, 'deleteSupplier'])->middleware(['auth', 'verified']);
 Route::get('/deleteproductcategory/{id}', [DeleteProductCategory::class, 'deleteProductCategory'])->middleware(['auth', 'verified']);

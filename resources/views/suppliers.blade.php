@@ -249,11 +249,13 @@
                     </div>
 
                     <div class="table-responsive">
+                        <p class="alert alert-success msg" style="display: none"></p>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                 <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" class="checkallsuppliers">
+                                    <i class="fa fa-trash delSupplier"></i>
                                 </th>
                                 <th scope="col">Supplier Name</th>
                                 <th scope="col">Supplier Phone Number</th>
@@ -266,7 +268,7 @@
                                 @foreach ($suppliers as $supplier)
                                     <tr>
                                         <th scope="row">
-                                            <input type="checkbox" name="" id="">
+                                            <input type="checkbox" name="" id="" class="checksuppliers" data-id="{{ $supplier->id }}">
                                         </th>
                                         <td>{{ $supplier->suppliersName }}</td>
                                         <td>{{ $supplier->suppliersPhoneNumber }}</td>

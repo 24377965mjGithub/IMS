@@ -256,8 +256,8 @@
                             <thead>
                                 <tr>
                                 <th scope="col">
-                                    <input type="checkbox" name="" id="">
-                                </th>
+                                    <i class="fa fa-users"></i>
+                                  </th>
                                 <th scope="col">Customer Type</th>
                                 <th scope="col">Date Added</th>
                             <tbody>
@@ -265,7 +265,7 @@
                                 @foreach ($customerTypes as $customerType)
                                     <tr wire:key="{{ $customerType->id }}">
                                         <th scope="row">
-                                            <input type="checkbox" name="" id="">
+                                            <i class="fa fa-user"></i>
                                         </th>
                                         {{-- display discounted if discounted --}}
                                         @if ($customerType->isDiscounted)

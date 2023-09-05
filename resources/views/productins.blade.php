@@ -245,9 +245,6 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                  <th scope="col">
-                                    <input type="checkbox" name="" id="">
-                                  </th>
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>
                                   <th scope="col">Name</th>
@@ -266,9 +263,6 @@
                                     @foreach ($productIns as $productIn)
                                         @if (App\Models\Products::where('id', $productIn->productId)->count() != 0)
                                             <tr>
-                                                <th scope="row">
-                                                    <input type="checkbox" name="" id="">
-                                                </th>
                                                 {{-- loop product details --}}
                                                 @foreach ($products as $product)
                                                     {{-- if product id matches --}}

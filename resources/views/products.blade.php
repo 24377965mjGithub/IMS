@@ -449,11 +449,13 @@
                     </div>
 
                     <div class="table-responsive">
+                        <p class="alert alert-success msg" style="display: none"></p>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" class="checkallproducts">
+                                    <i class="fa fa-trash delProd"></i>
                                   </th>
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>
@@ -471,7 +473,7 @@
                                     @foreach ($products as $product)
                                     <tr class="search_div">
                                         <th scope="row">
-                                            <input type="checkbox" name="" id="">
+                                            <input type="checkbox" name="" id="" class="checkproducts" data-id="{{ $product->id }}">
                                         </th>
                                         <td>
                                             <img src="{{ url('/assets/images/uploads/'.$product->productImage) }}" alt="">

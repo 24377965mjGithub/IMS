@@ -259,7 +259,7 @@
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <i class="fa fa-users"></i>
                                   </th>
                                   <th scope="col">Customer Type</th>
                                   <th scope="col">Discounted (%)</th>
@@ -269,7 +269,7 @@
                                     @if ($customerType->isDiscounted)
                                         <tr>
                                             <th scope="col">
-                                                <input type="checkbox" name="" id="">
+                                                <i class="fa fa-user"></i>
                                             </th>
                                             <td>{{ $customerType->customersType }}</td>
                                             <td><b class="text-success">{{ $customerType->discountPercentage }}%</b></td>

@@ -346,7 +346,7 @@
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <i class="fa fa-users"></i>
                                   </th>
                                   <th scope="col">Staff Name</th>
                                   <th scope="col">Role</th>
@@ -359,7 +359,7 @@
                                 @foreach ($staffs as $staff)
                                     <tr>
                                         <th scope="col">
-                                            <input type="checkbox" name="" id="">
+                                            <i class="fa fa-user"></i>
                                         </th>
                                         <td>{{ $staff->firstname }} {{ $staff->middlename }} {{ $staff->lastname }}</td>
                                         @foreach ($roles as $role)

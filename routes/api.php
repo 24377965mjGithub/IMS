@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AddSupplierController;
+use App\Http\Controllers\Api\CheckboxesController;
 use App\Http\Controllers\Api\GetSuppliersController;
 use App\Http\Controllers\Api\EditSuppliersController;
 use App\Http\Controllers\Api\GetSalesController;
@@ -45,3 +46,8 @@ Route::middleware('auth:sanctum')->post('/filter-expense',[FilterDates::class, '
 // post
 
 Route::middleware('auth:sanctum')->post('/addsupplier',[AddSupplierController::class, 'addSupplier']);
+Route::middleware('auth:sanctum')->post('/deleteproduct',[CheckboxesController::class, 'deleteProduct']);
+Route::middleware('auth:sanctum')->post('/deleteproductcateg',[CheckboxesController::class, 'deleteProductCategory']);
+Route::middleware('auth:sanctum')->post('/deleteproductfailure',[CheckboxesController::class, 'deleteProductFailure']);
+Route::middleware('auth:sanctum')->post('/deletesupplier',[CheckboxesController::class, 'deleteSupplier']);
+Route::middleware('auth:sanctum')->post('/deletecustomer',[CheckboxesController::class, 'deleteCustomer']);

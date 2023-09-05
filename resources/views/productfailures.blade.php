@@ -199,11 +199,13 @@
                     </div>
 
                     <div class="table-responsive">
+                        <p class="alert alert-success msg" style="display: none"></p>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" class="checkallproductfailure">
+                                    <i class="fa fa-trash delProdFailure"></i>
                                   </th>
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>
@@ -223,7 +225,7 @@
                                         @if (App\Models\Products::where('id', $productFailure->productId)->count() != 0)
                                             <tr>
                                                 <th scope="row">
-                                                    <input type="checkbox" name="" id="">
+                                                    <input type="checkbox" name="" id="" class="checkproductfailure" data-id="{{ $productFailure->id }}">
                                                 </th>
 
                                                 {{-- query product details --}}

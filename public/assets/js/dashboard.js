@@ -9,7 +9,6 @@ $(document).ready(function () {
             to: to,
             _token: $('meta[name="csrf-token"]').attr('content')
         }, function (res) {
-            // console.log(res);
 
             let globalDateHolder = [];
 
@@ -219,36 +218,36 @@ $(document).ready(function () {
 
     res.productOuts.forEach(element => {
 
-      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      let date_s  = new Date(element.created_at);
-      let dateNow = new Date();
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let date_s  = new Date(element.created_at);
+        let dateNow = new Date();
 
-      let salesDate = date_s.toLocaleDateString("en-US", options);
+        let salesDate = date_s.toLocaleDateString("en-US", options);
 
-      // query products
+        // query products
 
-      res.products.forEach(element2 => {
-        res.customerTypes.forEach(discount => {
-          if(element.customersTypeId == discount.id) {
-            if (element.productId === element2.id) {
-              if (!discount.discountPercentage) {
-                sales.push({
-                  'item': element2.productName,
-                  'sale': Math.round((element.quantity * element2.productPrice + Number.EPSILON) * 100) / 100,
-                  'date': salesDate
-                });
-              } else {
-                sales.push({
-                  'item': element2.productName,
-                  'sale': (element.quantity * element2.productPrice - element.quantity * element2.productPrice * parseFloat("0."+discount.discountPercentage)).toFixed(1),
-                  'date': salesDate
-                });
-              }
+        res.products.forEach(element2 => {
+            res.customerTypes.forEach(discount => {
+            if(element.customersTypeId == discount.id) {
+                if (element.productId === element2.id) {
+                    if (!discount.discountPercentage) {
+                        sales.push({
+                        'item': element2.productName,
+                        'sale': Math.round((element.quantity * element2.productPrice + Number.EPSILON) * 100) / 100,
+                        'date': salesDate
+                        });
+                    } else {
+                        sales.push({
+                        'item': element2.productName,
+                        'sale': (element.quantity * element2.productPrice - element.quantity * element2.productPrice * parseFloat("0."+discount.discountPercentage)).toFixed(1),
+                        'date': salesDate
+                        });
+                    }
+                }
             }
-          }
-        });
+            });
 
-      });
+        });
     });
 
     // end query product outs ==============================================================================================
@@ -259,9 +258,17 @@ $(document).ready(function () {
       return r;
     },{}));
 
+
+    let counter = 0;
+    let limit = 5;
+
     // dates in sales
     salesPerMonth.forEach(element => {
-      globalDateHolder.push(element.Date);
+        if (counter != limit) {
+            counter++;
+            console.log(counter)
+          globalDateHolder.unshift(element.Date);
+        }
     });
 
     let saleHolder = [];
@@ -403,7 +410,6 @@ $(document).ready(function () {
         to: to,
         _token: $('meta[name="csrf-token"]').attr('content')
     }, function (res) {
-        // console.log(res);
 
         let globalDateHolder = [];
 
@@ -450,10 +456,6 @@ $(document).ready(function () {
             globalDateHolder.push(element.Date);
         });
 
-        // console.log(sum)
-
-        // console.log(globalDateHolder)
-
         let deliveryHolder = [];
         let maxValue = [];
 
@@ -474,9 +476,6 @@ $(document).ready(function () {
 
         var chart = {
         series: [
-            // { name: "Earnings this month:", data: [50, 390, 300, 350, 390, 180, 355, 390] },
-            // { name: "Expense this month:", data: [20, 300, 325, 215, 300, 310, 280, 300] },
-            // { name: "Earnings this day:", data: saleHolder },
             { name: "Expenses this day:", data: deliveryHolder },
         ],
 
@@ -619,13 +618,21 @@ $(document).ready(function () {
       return r;
     },{}));
 
+    let counter = 0;
+    let limit = 5;
+
+    // dates in sales
     deliveryPerMonth.forEach(element => {
-      globalDateHolder.push(element.Date);
+        if (counter != limit) {
+            counter++;
+            console.log(counter)
+          globalDateHolder.unshift(element.Date);
+        }
     });
 
-    // console.log(sum)
-
-    // console.log(globalDateHolder)
+    // deliveryPerMonth.forEach(element => {
+    //   globalDateHolder.push(element.Date);
+    // });
 
     let deliveryHolder = [];
     let maxValue = [];
@@ -647,9 +654,6 @@ $(document).ready(function () {
 
     var chart = {
       series: [
-        // { name: "Earnings this month:", data: [50, 390, 300, 350, 390, 180, 355, 390] },
-        // { name: "Expense this month:", data: [20, 300, 325, 215, 300, 310, 280, 300] },
-        // { name: "Earnings this day:", data: saleHolder },
         { name: "Expenses this day:", data: deliveryHolder },
       ],
 
@@ -700,7 +704,6 @@ $(document).ready(function () {
 
       xaxis: {
         type: "category",
-        // categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
         categories: globalDateHolder,
         labels: {
           style: { cssClass: "grey--text lighten-2--text fill-color" },
@@ -867,27 +870,6 @@ $(document).ready(function () {
         $('.monthlyEarning').append("₱" + total.toLocaleString());
         $('.monthYear').html(monthAndYear);
 
-        console.log(total);
-
-    });
-
-    console.log(salesPerMonth);
-
-    let pastYear = "";
-    let yearSaleComputer = []
-
-    salesPerMonth.forEach(sale => {
-        let splitYearInSale = sale.Date.split(' ');
-
-        if(pastYear === splitYearInSale[3]) {
-            yearSaleComputer.push(splitYearInSale[3]);
-            console.log('Same year ' + splitYearInSale[3]);
-        } else {
-            yearSaleComputer.push(splitYearInSale[3]);
-            console.log('Not same year ' + splitYearInSale[3]);
-        }
-
-        console.log(yearSaleComputer);
     });
   });
 
@@ -959,7 +941,7 @@ $(document).ready(function () {
 
     // dates in sales
     salesPerMonth.forEach(element => {
-      globalDateHolder.push(element.Date);
+      globalDateHolder.unshift(element.Date);
     });
 
     let saleHolder = [];
@@ -971,18 +953,16 @@ $(document).ready(function () {
         maxValue.push(sales.Sales);
 
         if (dates === sales.Date) {
-          saleHolder.push(sales.Sales);
+          saleHolder.unshift(sales.Sales);
         }
       });
     });
 
-    let lastEarning = saleHolder[saleHolder.length - 1];
+    let lastEarning = saleHolder[0];
 
     // sale now
     $('.saleNow').append(lastEarning.toLocaleString());
-    $('.currentDateEarning').append(salesPerMonth[salesPerMonth.length - 1].Date)
-
-    console.log(salesPerMonth)
+    $('.currentDateEarning').append(salesPerMonth[0].Date)
 
     $('.searchDailyEarnings').click(function () {
         let dailyEarningDate = new Date($('.dailyEarningDate').val()).toLocaleDateString("en-US", options)
@@ -1019,7 +999,6 @@ $(document).ready(function () {
           {
             name: "Earnings",
             color: "#49BEFF",
-            // data: [25, 66, 20, 40, 12, 58, 20],
             data: saleHolder,
           },
         ],
@@ -1075,13 +1054,9 @@ $(document).ready(function () {
         productPrice.push(parseFloat(element.productPrice))
     });
 
-    console.log(productPrice);
-
     var productQuantity = {
         color: "#adb5bd",
-        // series: [38, 40, 25],
         series: productQuantities,
-        // labels: ["2022", "2021", "2020"],
         labels: productNames,
         chart: {
           width: 180,
@@ -1129,9 +1104,7 @@ $(document).ready(function () {
 
       var productsPrice = {
         color: "#adb5bd",
-        // series: [38, 40, 25],
         series: productPrice,
-        // labels: ["2022", "2021", "2020"],
         labels: productNames,
         chart: {
           width: 180,
@@ -1181,6 +1154,5 @@ $(document).ready(function () {
       productQ.render();
       var productPriceChart = new ApexCharts(document.querySelector("#price"), productsPrice);
       productPriceChart.render();
-    //   productPriceChart.render();
   })
 })

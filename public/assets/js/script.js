@@ -94,4 +94,129 @@ $(document).ready(function (){
             })
         }
     })
+
+    // checkbox - products
+
+    var clickedProd = false;
+    $(".checkallproducts").on("click", function() {
+    $(".checkproducts").prop("checked", !clickedProd);
+        clickedProd = !clickedProd;
+        this.innerHTML = clickedProd ? 'Deselect' : 'Select';
+    });
+    $('.delProd').click(function () {
+        let array = [];
+        $(".checkproducts:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        $.post('/api/deleteproduct', {
+            ids: array,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }, function (res) {
+            console.log(res)
+            $('.msg').show();
+            $('.msg').text(res);
+            window.location.reload();
+        })
+    })
+
+    // checkbox - productcategory
+
+    var clickProdCateg = false;
+    $(".checkallproductcateg").on("click", function() {
+    $(".checkproductcateg").prop("checked", !clickProdCateg);
+        clickProdCateg = !clickProdCateg;
+        this.innerHTML = clickProdCateg ? 'Deselect' : 'Select';
+    });
+    $('.delProdCateg').click(function () {
+        let array = [];
+        $(".checkproductcateg:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        $.post('/api/deleteproductcateg', {
+            ids: array,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }, function (res) {
+            console.log(res)
+            $('.msg').show();
+            $('.msg').text(res);
+            window.location.reload();
+        })
+    })
+
+    // checkbox - productcategory
+
+    var clickProdCateg = false;
+    $(".checkallproductfailure").on("click", function() {
+    $(".checkproductfailure").prop("checked", !clickProdCateg);
+        clickProdCateg = !clickProdCateg;
+        this.innerHTML = clickProdCateg ? 'Deselect' : 'Select';
+    });
+    $('.delProdFailure').click(function () {
+        let array = [];
+        $(".checkproductfailure:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        $.post('/api/deleteproductfailure', {
+            ids: array,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }, function (res) {
+            console.log(res)
+            $('.msg').show();
+            $('.msg').text(res);
+            window.location.reload();
+        })
+    })
+
+    // checkbox - supplier
+
+    var clickSuppliers = false;
+    $(".checkallsuppliers").on("click", function() {
+    $(".checksuppliers").prop("checked", !clickSuppliers);
+        clickSuppliers = !clickSuppliers;
+        this.innerHTML = clickSuppliers ? 'Deselect' : 'Select';
+    });
+    $('.delSupplier').click(function () {
+        let array = [];
+        $(".checksuppliers:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        $.post('/api/deletesupplier', {
+            ids: array,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }, function (res) {
+            console.log(res)
+            $('.msg').show();
+            $('.msg').text(res);
+            window.location.reload();
+        })
+    })
+
+    // checkbox - customers
+
+    var clickCustomers = false;
+    $(".checkallcustomers").on("click", function() {
+    $(".checkcustomers").prop("checked", !clickCustomers);
+        clickCustomers = !clickCustomers;
+        this.innerHTML = clickCustomers ? 'Deselect' : 'Select';
+    });
+    $('.delCustomer').click(function () {
+        let array = [];
+        $(".checkcustomers:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        $.post('/api/deletecustomer', {
+            ids: array,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }, function (res) {
+            console.log(res)
+            $('.msg').show();
+            $('.msg').text(res);
+            window.location.reload();
+        })
+    })
 })

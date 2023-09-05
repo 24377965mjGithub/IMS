@@ -245,7 +245,7 @@
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <i class="fa fa-users"></i>
                                   </th>
                                   <th scope="col">Role Name</th>
                                   <th scope="col">Date Added</th>
@@ -255,7 +255,7 @@
                                 @foreach ($roles as $role)
                                     <tr>
                                         <th scope="col">
-                                            <input type="checkbox" name="" id="">
+                                            <i class="fa fa-user"></i>
                                         </th>
                                         <td>{{ $role->roleName }}</td>
                                         <td>{{ $role->created_at->format(' d M Y H:i:s') }} ({{ $role->created_at->diffForHumans() }})</td>

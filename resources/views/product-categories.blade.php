@@ -250,11 +250,13 @@
                     </div>
 
                     <div class="table-responsive">
+                        <p class="alert alert-success msg" style="display: none"></p>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                   <th scope="col">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" class="checkallproductcateg">
+                                    <i class="fa fa-trash delProdCateg"></i>
                                   </th>
                                   <th scope="col">Category Name</th>
                                   <th scope="col">Category Description</th>
@@ -264,7 +266,7 @@
                                 @foreach ($productCategories as $productCategory)
                                     <tr>
                                         <th scope="row">
-                                            <input type="checkbox" name="" id="">
+                                            <input type="checkbox" name="" id="" class="checkproductcateg" data-id="{{ $productCategory->id }}">
                                         </th>
                                         <td>{{ $productCategory->categoryName }}</td>
                                         <td>{{ $productCategory->categoryDescription }}</td>

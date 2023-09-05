@@ -211,6 +211,16 @@
                                         </a>
                                     </ul>
                                 </li>
+                                <li class="nav-link hidden-menus">
+                                    <h3 class="nav-link" v-pre>
+                                        Discounts
+                                    </h3>
+                                    <ul class="">
+                                        <a href="{{ url('/discounted') }}" class="nav-link">
+                                            <li class="nav-link"><h5><i class="fa fa-circle" style="font-size: 10px"></i> Discounted Customers</h5></li>
+                                        </a>
+                                    </ul>
+                                </li>
                             @endif
 
                             {{-- end hidden --}}

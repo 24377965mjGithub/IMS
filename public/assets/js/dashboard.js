@@ -889,57 +889,6 @@ $(document).ready(function () {
 
         console.log(yearSaleComputer);
     });
-
-    var monthlyEarning = {
-        color: "#adb5bd",
-        series: [38, 40, 25],
-        labels: ["2022", "2021", "2020"],
-        chart: {
-          width: 180,
-          type: "pie",
-          fontFamily: "Plus Jakarta Sans', sans-serif",
-          foreColor: "#adb0bb",
-        },
-        plotOptions: {
-          pie: {
-            startAngle: 0,
-            endAngle: 360,
-            donut: {
-              size: '75%',
-            },
-          },
-        },
-        stroke: {
-          show: false,
-        },
-
-        dataLabels: {
-          enabled: false,
-        },
-
-        legend: {
-          show: false,
-        },
-        colors: ["#5D87FF", "#ecf2ff", "#dc3545"],
-
-        responsive: [
-          {
-            breakpoint: 991,
-            options: {
-              chart: {
-                width: 150,
-              },
-            },
-          },
-        ],
-        tooltip: {
-          theme: "dark",
-          fillSeriesColor: false,
-        },
-      };
-
-      var chart = new ApexCharts(document.querySelector("#monthlyEarning"), monthlyEarning);
-      chart.render();
   });
 
 
@@ -1103,7 +1052,135 @@ $(document).ready(function () {
   });
 
 
+//   products
+
+  $.get('/api/getmodels',function (res) {
+
+    let productNames = [];
+    let productQuantities = [];
+    let colors = [];
+    let productPrice = [];
+
+    res.forEach(element => {
+        let maxVal = 0xFFFFFF; // 16777215
+        let randomNumber = Math.random() * maxVal;
+        randomNumber = Math.floor(randomNumber);
+        randomNumber = randomNumber.toString(16);
+        let randColor = randomNumber.padStart(6, 0);
 
 
+        colors.push(`#${randColor.toUpperCase()}`);
+        productNames.push(element.productName);
+        productQuantities.push(element.productQuantity);
+        productPrice.push(parseFloat(element.productPrice))
+    });
 
+    console.log(productPrice);
+
+    var productQuantity = {
+        color: "#adb5bd",
+        // series: [38, 40, 25],
+        series: productQuantities,
+        // labels: ["2022", "2021", "2020"],
+        labels: productNames,
+        chart: {
+          width: 180,
+          type: "pie",
+          fontFamily: "Plus Jakarta Sans', sans-serif",
+          foreColor: "#adb0bb",
+        },
+        plotOptions: {
+          pie: {
+            startAngle: 0,
+            endAngle: 360,
+            donut: {
+              size: '75%',
+            },
+          },
+        },
+        stroke: {
+          show: false,
+        },
+
+        dataLabels: {
+          enabled: false,
+        },
+
+        legend: {
+          show: false,
+        },
+        colors: colors,
+
+        responsive: [
+          {
+            breakpoint: 991,
+            options: {
+              chart: {
+                width: 150,
+              },
+            },
+          },
+        ],
+        tooltip: {
+          theme: "dark",
+          fillSeriesColor: false,
+        },
+      };
+
+      var productsPrice = {
+        color: "#adb5bd",
+        // series: [38, 40, 25],
+        series: productPrice,
+        // labels: ["2022", "2021", "2020"],
+        labels: productNames,
+        chart: {
+          width: 180,
+          type: "donut",
+          fontFamily: "Plus Jakarta Sans', sans-serif",
+          foreColor: "#adb0bb",
+        },
+        plotOptions: {
+          pie: {
+            startAngle: 0,
+            endAngle: 360,
+            donut: {
+              size: '50%',
+            },
+          },
+        },
+        stroke: {
+          show: false,
+        },
+
+        dataLabels: {
+          enabled: false,
+        },
+
+        legend: {
+          show: false,
+        },
+        colors: colors,
+
+        responsive: [
+          {
+            breakpoint: 991,
+            options: {
+              chart: {
+                width: 150,
+              },
+            },
+          },
+        ],
+        tooltip: {
+          theme: "dark",
+          fillSeriesColor: false,
+        },
+      };
+
+      var productQ = new ApexCharts(document.querySelector("#productQuantity"), productQuantity);
+      productQ.render();
+      var productPriceChart = new ApexCharts(document.querySelector("#price"), productsPrice);
+      productPriceChart.render();
+    //   productPriceChart.render();
+  })
 })

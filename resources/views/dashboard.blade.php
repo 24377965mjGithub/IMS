@@ -218,8 +218,83 @@
 
                                 {{-- endcharts --}}
 
+                                <div class="card overflow-hidden">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title mb-9 fw-semibold">Product Overview</h5>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <b>Product Prices "P"</b>
+                                                <div class="d-flex justify-content-center">
+                                                    <div id="price"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <b>Product Quantity</b>
+                                                <div class="d-flex justify-content-center">
+                                                    <div id="productQuantity"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <!-- Yearly Breakup -->
+                                <div class="card">
+                                    <div class="card-body">
+                                    <div class="row alig n-items-start">
+                                        <div class="col-8">
+                                        <h5 class="card-title mb-9 fw-semibold"> Daily Earnings </h5>
+
+                                        {{-- filter daily sales --}}
+
+                                        <div class="row py-3">
+                                            <div class="col-10">
+                                                <div class="form-group">
+                                                    <label for="">Search date</label>
+                                                    <input type="date" name="" class="form-control dailyEarningDate" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="">Search</label>
+                                                    <button class="btn btn-primary searchDailyEarnings"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- end filter daily sales --}}
+
+                                        <h4 class="fw-semibold mb-3 searchSaleDate" style="display: none"><span class="saleSearchDate"></span>: <span class="saleSearchEarnings text-success"></span></h5>
+                                        <h4 class="searchDailyEarningsError text-danger py-2"></h4>
+
+                                        <b class="currentDateEarning"></b>
+                                        <h4 class="fw-semibold mb-3">Today: <span class="saleNow text-success">₱</span></h4>
+                                        <div class="d-flex align-items-center pb-1">
+                                            {{-- <span
+                                            class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                                            <i class="ti ti-arrow-down-right text-danger"></i>
+                                            </span> --}}
+                                            {{-- <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                                            <p class="fs-3 mb-0">last year</p> --}}
+                                            <p>
+                                                Daily earnings refer to the amount of money a business earns within a single day
+                                            </p>
+                                        </div>
+                                        </div>
+                                        <div class="col-4">
+                                        <div class="d-flex justify-content-end">
+                                            <div
+                                            class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                                            <i class="ti ti-currency-dollar fs-6"></i>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div id="earning"></div>
+                                </div>
+
+
+                                <!-- monthly earnings -->
 
                                 <div class="card overflow-hidden">
                                     <div class="card-body p-4">
@@ -267,7 +342,7 @@
                                             </div>
                                             <div class="col-4">
                                             <div class="d-flex justify-content-center">
-                                                <div id="monthlyEarning"></div>
+                                                {{-- <div id="monthlyEarning"></div> --}}
                                             </div>
                                             </div>
                                         </div>
@@ -276,60 +351,7 @@
                             </div>
                             <div class="col-lg-12">
                             <!-- Monthly Earnings -->
-                            <div class="card">
-                                <div class="card-body">
-                                <div class="row alig n-items-start">
-                                    <div class="col-8">
-                                    <h5 class="card-title mb-9 fw-semibold"> Daily Earnings </h5>
 
-                                    {{-- filter daily sales --}}
-
-                                    <div class="row py-3">
-                                        <div class="col-10">
-                                            <div class="form-group">
-                                                <label for="">Search date</label>
-                                                <input type="date" name="" class="form-control dailyEarningDate" id="">
-                                            </div>
-                                        </div>
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                <label for="">Search</label>
-                                                <button class="btn btn-primary searchDailyEarnings"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {{-- end filter daily sales --}}
-
-                                    <h4 class="fw-semibold mb-3 searchSaleDate" style="display: none"><span class="saleSearchDate"></span>: <span class="saleSearchEarnings text-success"></span></h5>
-                                    <h4 class="searchDailyEarningsError text-danger py-2"></h4>
-
-                                    <b class="currentDateEarning"></b>
-                                    <h4 class="fw-semibold mb-3">Today: <span class="saleNow text-success">₱</span></h4>
-                                    <div class="d-flex align-items-center pb-1">
-                                        {{-- <span
-                                        class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-arrow-down-right text-danger"></i>
-                                        </span> --}}
-                                        {{-- <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                                        <p class="fs-3 mb-0">last year</p> --}}
-                                        <p>
-                                            Daily earnings refer to the amount of money a business earns within a single day
-                                        </p>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="d-flex justify-content-end">
-                                        <div
-                                        class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-currency-dollar fs-6"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div id="earning"></div>
-                            </div>
 
                             {{-- logs --}}
 

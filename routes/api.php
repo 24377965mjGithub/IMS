@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\GetSalesController;
 use App\Http\Controllers\Api\CreateCategoryInProductAddController;
 use App\Http\Controllers\Api\CreateSupplierInProductAddController;
 use App\Http\Controllers\Api\FilterDates;
+use App\Http\Controllers\Api\GetModels;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +32,15 @@ Route::middleware('auth:sanctum')->get('/getsuppliers',[GetSuppliersController::
 Route::middleware('auth:sanctum')->get('/getsales',[GetSalesController::class, 'getSales']);
 Route::middleware('auth:sanctum')->get('/loadproductcategories',[CreateCategoryInProductAddController::class, 'loadCategories']);
 Route::middleware('auth:sanctum')->get('/loadproductsuppliers',[CreateSupplierInProductAddController::class, 'loadSuppliers']);
-Route::middleware('auth:sanctum')->post('/filter-sales',[FilterDates::class, 'filterDateSales']);
-Route::middleware('auth:sanctum')->post('/filter-expense',[FilterDates::class, 'filterDateExpenses']);
+Route::middleware('auth:sanctum')->get('/getmodels',[GetModels::class, 'getProducts']);
 
 // put
 
 Route::middleware('auth:sanctum')->post('/editsupplier',[EditSuppliersController::class, 'saveSupplier']);
 Route::middleware('auth:sanctum')->post('/addcategoryonproductadd',[CreateCategoryInProductAddController::class, 'addCategoryOnProductAdd']);
 Route::middleware('auth:sanctum')->post('/addsupplieronproductadd',[CreateSupplierInProductAddController::class, 'addSupplierOnProductAdd']);
+Route::middleware('auth:sanctum')->post('/filter-sales',[FilterDates::class, 'filterDateSales']);
+Route::middleware('auth:sanctum')->post('/filter-expense',[FilterDates::class, 'filterDateExpenses']);
 
 // post
 

@@ -13,10 +13,10 @@ class GetSalesController extends Controller
 {
     public function getSales() {
         return response()->json([
-            'productIns' => ProductIns::orderBy('id', 'desc')->get(),
-            'productOuts' => ProductOuts::orderBy('id', 'desc')->get(),
-            'products' => Products::all(),
-            'customerTypes' => CustomerType::all()
-        ]);
+                'productIns' => ProductIns::orderBy('id', 'desc')->get(),
+                'productOuts' => ProductOuts::orderBy('id', 'desc')->get(),
+                'products' => Products::all(),
+                'customerTypes' => CustomerType::all()
+            ]);
     }
 }

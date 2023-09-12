@@ -456,6 +456,7 @@
                                   <th scope="col">
                                     <input type="checkbox" name="" id="" class="checkallproducts">
                                     <i class="fa fa-trash delProd"></i>
+                                    <i class="fa fa-shopping-cart delProd"></i>
                                   </th>
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>

@@ -45,6 +45,7 @@ class ProductsController extends Controller
 
         $units = [
             'Piece',
+            'Box',
             'Meter',
             'Mass',
             'Ampere',

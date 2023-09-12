@@ -15,7 +15,7 @@ class ProductUploadController extends Controller
             'productImage' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             'productCategoryId' => 'required',
             'suppliersId' => 'required',
-            'productBarCode' => 'max:225',
+            'productBarCode' => 'max:13',
             'productName' => 'required',
             'productDescription'=> 'max:225',
             'productPrice' => 'required',

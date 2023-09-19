@@ -103,6 +103,9 @@ $(document).ready(function (){
         clickedProd = !clickedProd;
         this.innerHTML = clickedProd ? 'Deselect' : 'Select';
     });
+
+    //--> delete
+
     $('.delProd').click(function () {
         let array = [];
         $(".checkproducts:checked").each(function() {
@@ -118,6 +121,47 @@ $(document).ready(function (){
             $('.msg').text(res);
             window.location.reload();
         })
+    })
+
+    //--> cart
+
+    let localCartStorage = JSON.parse(localStorage.getItem('inventory_management_system_cart'));
+    if  (!localCartStorage) { localCartStorage = [] }
+
+    $('.cart').click(function () {
+        let array = [];
+        $(".checkproducts:checked").each(function() {
+            array.push($(this).attr('data-id'));
+        });
+
+        let localCartStorage = JSON.parse(localStorage.getItem('inventory_management_system_cart'));
+        if  (!localCartStorage) { localCartStorage = [] }
+
+        array.forEach(element => {
+            if (!localCartStorage.includes(element))  {
+                localCartStorage.unshift(element);
+            }
+            localStorage.setItem('inventory_management_system_cart', JSON.stringify(localCartStorage))
+            window.location.reload();
+
+        });
+    })
+
+    $('.cartCount').html(localCartStorage.length);
+
+    // carttoggle
+
+    $('.cart-toggle').click(function() {
+        $('.cart-dropdown').slideToggle();
+    })
+
+    // clear cart
+
+    $('.clearCart').click(function () {
+        localCartStorage = [];
+        localStorage.setItem('inventory_management_system_cart', JSON.stringify(localCartStorage))
+        window.location.reload();
+
     })
 
     // checkbox - productcategory

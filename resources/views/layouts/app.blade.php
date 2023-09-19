@@ -326,6 +326,12 @@
     {{-- welcome --}}
     {{-- <script src="{{ asset('assets/welcome/js/main.min.js') }}"></script> --}}
 
+    {{-- axios --}}
+    <script src="{{asset('assets/js/axios.min.js')}}"></script>
+    {{-- vue --}}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="{{asset('assets/js/vue.js')}}"></script>
+
     {{-- custom --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 

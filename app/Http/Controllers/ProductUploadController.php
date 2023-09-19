@@ -48,7 +48,7 @@ class ProductUploadController extends Controller
                 'productPrice' => $req->productPrice,
                 'productQuantity' => $req->productQuantity,
                 'productUnit' => $req->productUnit,
-                'productStatus' => 'available',
+                'productStatus' => 'Available',
                 'productCost'  => $req->productCost
             ])) {
 

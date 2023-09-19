@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class CheckboxesController extends Controller
 {
+    public function cart() {
+        return response()->json(Products::all());
+    }
+
     public function deleteProduct(Request $request) {
 
         foreach ($request->ids as $value) {

@@ -12,12 +12,12 @@ use App\Models\Products;
 class SaveProductOutController extends Controller
 {
     public function saveProductOut(Request $request, $productCategoryId, $suppliersId, $productId) {
-        
+
         $request->validate([
             'customer' => 'required',
             'quantity' => 'required'
         ]);
-        
+
         // get user
         $userId = Auth::id();
         $userRoleId = User::where(['id' => $userId])->value('role');
@@ -46,7 +46,7 @@ class SaveProductOutController extends Controller
 
                 if ($newQuantity <= 0) {
                     Products::where(['id' => $productId])->update([
-                        'productStatus' => 'not available'
+                        'productStatus' => 'Not available'
                     ]);
                 }
 

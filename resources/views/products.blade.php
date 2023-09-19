@@ -322,13 +322,13 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="">Selling Price</label>
-                                                            <input type="number" placeholder="P 00.00" class="form-control" name="productPrice">
+                                                            <input type="number" min="0" max="1000000" step="0.01" placeholder="P 00.00" class="form-control" name="productPrice">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="">Cost</label>
-                                                            <input type="number" placeholder="P 00.00" class="form-control" name="productCost">
+                                                            <input type="number" min="0" max="1000000" step="0.01" placeholder="P 00.00" class="form-control" name="productCost">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -450,13 +450,42 @@
 
                     <div class="table-responsive">
                         <p class="alert alert-success msg" style="display: none"></p>
+
+                        <div class="cart-dropdown" style="display:none">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                  <h5 class="card-title">Cart</h5>
+                                </div>
+                                <div id="cartProducts">
+
+                                </div>
+                                <div class="card-body">
+                                  <button class="btn btn-danger clearCart">Clear Cart <i class="fa fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
                         <table class="table table-striped">
+                            <div class="btn-group" style="margin-bottom: 20px">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" style="font-size: 12px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a style="font-size: 12px" class="dropdown-item cart" href="#">
+                                        <i class="fa fa-shopping-cart"></i> Add selected to cart
+                                    </a>
+                                    <a style="font-size: 12px" class="dropdown-item" href="#">
+                                        <i class="fa fa-trash delProd"></i> Remove Selected
+                                    </a>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary cart-toggle" style="font-size: 12px; margin-bottom: 20px; margin-left: 10px">
+                                <i class="fa fa-shopping-cart"></i> Cart <sup style="font-weight: bold; color:  red" class="cartCount">0</sup>
+                            </button>
                             <thead>
                                 <tr>
                                   <th scope="col">
                                     <input type="checkbox" name="" id="" class="checkallproducts">
-                                    <i class="fa fa-trash delProd"></i>
-                                    <i class="fa fa-shopping-cart delProd"></i>
                                   </th>
                                   <th scope="col">Image</th>
                                   <th scope="col">Bar Code</th>
@@ -595,13 +624,13 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label for="">Selling Price</label>
-                                                                        <input type="number" placeholder="P 00.00" class="form-control" name="productPrice" value="{{ $product->productPrice }}">
+                                                                        <input type="number" min="0" max="1000000" step="0.01" placeholder="P 00.00" class="form-control" name="productPrice" value="{{ $product->productPrice }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label for="">Cost</label>
-                                                                        <input type="number" placeholder="P 00.00" class="form-control" name="productCost" value="{{ $product->productCost }}">
+                                                                        <input type="number" min="0" max="1000000" step="0.01" placeholder="P 00.00" class="form-control" name="productCost" value="{{ $product->productCost }}">
                                                                     </div>
                                                                 </div>
                                                             </div>

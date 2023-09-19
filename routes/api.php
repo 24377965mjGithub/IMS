@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AddSupplierController;
+use App\Http\Controllers\Api\CartCheckoutController;
+use App\Http\Controllers\Api\CartCustomerController;
 use App\Http\Controllers\Api\CheckboxesController;
 use App\Http\Controllers\Api\GetSuppliersController;
 use App\Http\Controllers\Api\EditSuppliersController;
@@ -34,6 +36,8 @@ Route::middleware('auth:sanctum')->get('/getsales',[GetSalesController::class, '
 Route::middleware('auth:sanctum')->get('/loadproductcategories',[CreateCategoryInProductAddController::class, 'loadCategories']);
 Route::middleware('auth:sanctum')->get('/loadproductsuppliers',[CreateSupplierInProductAddController::class, 'loadSuppliers']);
 Route::middleware('auth:sanctum')->get('/getmodels',[GetModels::class, 'getProducts']);
+Route::middleware('auth:sanctum')->get('/cart',[CheckboxesController::class, 'cart']);
+Route::middleware('auth:sanctum')->get('/customers',[CartCustomerController::class, 'getCustomers']);
 
 // put
 
@@ -42,6 +46,7 @@ Route::middleware('auth:sanctum')->post('/addcategoryonproductadd',[CreateCatego
 Route::middleware('auth:sanctum')->post('/addsupplieronproductadd',[CreateSupplierInProductAddController::class, 'addSupplierOnProductAdd']);
 Route::middleware('auth:sanctum')->post('/filter-sales',[FilterDates::class, 'filterDateSales']);
 Route::middleware('auth:sanctum')->post('/filter-expense',[FilterDates::class, 'filterDateExpenses']);
+Route::middleware('auth:sanctum')->post('/checkout',[CartCheckoutController::class, 'checkout']);
 
 // post
 
